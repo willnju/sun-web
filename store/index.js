@@ -1,20 +1,26 @@
-import {createStore} from 'redux';
-import todoApp from '../reducers';
+// import {createStore} from 'redux';
+// import todoApp from '../reducers';
+//
+// let cacheTodos  = localStorage.getItem('todos');
+// try{
+//     cacheTodos = JSON.parse(cacheTodos)
+// }catch(e){
+//     cacheTodos = {};
+// }finally {
+//     cacheTodos = cacheTodos || {};
+// }
+//
+//
+// let store = createStore(
+//     todoApp
+//     ,cacheTodos
+//     ,window.devToolsExtension ? window.devToolsExtension() : undefined//Chrome Extension
+// );
+import { createStore, applyMiddleware ,compose} from 'redux';
+import thunk from 'redux-thunk';
 
-let cacheTodos  = localStorage.getItem('todos');
-try{
-    cacheTodos = JSON.parse(cacheTodos)
-}catch(e){
-    cacheTodos = {};
-}finally {
-    cacheTodos = cacheTodos || {};
-}
+import reducer from '../reducers/index';
 
-
-let store = createStore(
-    todoApp
-    ,cacheTodos
-    ,window.devToolsExtension ? window.devToolsExtension() : undefined//Chrome Extension
-);
+const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
 export default store;

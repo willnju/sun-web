@@ -1,112 +1,109 @@
-html {
-
-}
-
-*, *:before, *:after {
-    box-sizing: inherit;
-    overflow-scrolling:touch;
-    transition:all .3s;
-}
-
 body {
-    margin: 0;
-    background-color:#dcdcb7;
+    border: 1px transparent solid;
 }
 
-h1, h2, h3, h4, h5, h6, p, ul {
-    margin: 0;
-    padding: 0;
-}
+.search-main{
 
-#app{
-    box-sizing: border-box;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    text-align:center;
-    font-size:16px;
-    font-family: Arial;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin:150px auto;
 }
-
-#app input[type=text]{
-    width:50%;
-    display:inline-block;
-    font-size:18px;
-    border-radius:5px;
-    padding:.5em;
-    box-sizing:border-box;
-    border:1px;
-    margin:0 auto 1em;
+.search-main-logo{
+    margin-bottom: 20px;
 }
-#app a{
-    margin:0 2em;
-    display:inline-block;
-    border:1px solid #999;
-    color:#333;
-    text-decoration: none;
-    padding:.3em .7em;
-    border-radius:4px;
+.search-main-2{
+    margin-top:10px;
 }
-
-
-#app h1{
-    color:#2f6fad;
-    margin:.5em 0;
+.results{
+    margin:30px 180px;
+    min-height: 550px;
 }
-
-#app ul{
-    width:50%;
-    display:block;
-    margin:1em auto 1em;
+.item{
+    margin-bottom: 20px;
 }
-#app li{
-    border-bottom:1px solid #333;
-    position:relative;
-    text-align:left;
-    padding:1em 0 1em 5.2em;
-    cursor:pointer;
-    word-break:break-all;
+.pagination{
+    margin: 50px 100px;
 }
-
-#app li .status{
-    position:absolute;
-    top:50%;
-    left:0;
-    transform:translate(0,-50%);
+.detail{
+    height: 80px;
+    background-color: #505050;
+    font-size: 26px;
+    vertical-align: middle;
+    color: #ff7800;
 }
-
-#app input[type=text]:focus,#app li:hover,#app a.active{
-    background:#2f6fad;
-    color:#fff;
-    border-color:#2f6fad;
+.detail-header-title{
+    margin: auto 70px;
 }
-
-#app li input[type=checkbox]{
-    position:absolute;
-    top:50%;
-    left:54px;
-    transform:translate(0,-65%);
-    display:inline-block;
-    font-size:30px;
+.detail-title{
+    margin-top: 30px;
+    font-size: 18px !important;
+    text-align: center;
 }
-#app li.done{
-    text-decoration: line-through;
+.content-title{
+    margin: 30px auto !important;
+    width: 50%;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 400;
 }
-
-#app li .delete{
-    position:absolute;
-    right:10px;
-    top:50%;
-    line-height:20px;
-    transform:translate(0,-50%);
-    display:none;
-    transition: all 0s;
+.content-author,.content-dept{
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 18px;
 }
-
-#app li:hover .delete{
-    display:block;
+.content-dept{
+    border-bottom: 1px gray dashed;
 }
-
-#app li:last-child{
-    border-bottom:none;
+.treeMap{
+    height: 90%;
+    width: 100%;
+}
+.detail-guid{
+    width: 30%;
+    margin: 25px auto !important;
+    font-size: 14px;
+}
+.detail-content{
+    font-size: 16px;
+}
+.ahead-name{
+    font-weight: 800;
+}
+.detail-item{
+    margin-bottom: 10px;
+}
+.targetToTreeMap{
+    color: #108ee9;
+    cursor: pointer;
+}
+.sourcetype{
+    font-size: 14px;
+    margin-top: 10px;
+    margin-right: 70px;
+    color: gray;
+}
+.sourcetype-result{
+    color: gray;
+    font-size: 14px;
+    background-color: #f8f8f8;
+    margin-top: 5px;
+}
+.sourcetype-item{
+    margin: 0 10px;
+    padding: 10px;
+}
+.active{
+    color: black;
+    font-weight: 500;
+    border-bottom: 1px black solid;
+    border-color: #108ee9;
+}
+.tree-content{
+    margin:10px auto;
+    width: 100%;
+    height: 600px;
+}
+.upload-title{
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    margin-top: 22px;
 }

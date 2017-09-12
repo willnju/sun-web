@@ -15,11 +15,20 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel'
+                loader: 'babel',
+                query:{
+                    plugins: [
+                        ["import", { libraryName: "antd", style: "css" }] // `style: true` 会加载 less 文件
+                    ]
+                }
             },
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style','css!postcss')
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                loader: 'url-loader'
             }
         ]
     },
@@ -36,7 +45,8 @@ module.exports = {
         new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV':'"production"'
-        })
+        }),
     ],
+
 
 }

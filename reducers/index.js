@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux';
-import visible from './setVisible';
-import todos from './todos';
-import newTaskName from './newTaskName';
+import {searchResult,source,detail,tree,existTree} from './search';
 
 const todoApp = combineReducers({
-    todos,
-    visible,
-    newTaskName
+    source:source,
+    searchResult:searchResult,
+    detail:detail,
+    tree:tree,
+    existTree:existTree,
 });
 
 export default todoApp;
