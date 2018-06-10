@@ -46,8 +46,8 @@ module.exports = {
         inline: true,
         hot:true,//热更新
         proxy: {
-            '/semantic/*':{
-                'target': 'http://localhost:8080/',
+            '/web/*':{
+                'target': 'http://172.26.7.135:8888/',
                 'secure': false, // 接受 运行在 https 上的服务
                 'changeOrigin': true,
             }
