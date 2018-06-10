@@ -1,12 +1,8 @@
 import {combineReducers} from 'redux';
-import {searchResult,source,detail,tree,existTree} from './search';
+import {homeBanner} from './home';
 
 const todoApp = combineReducers({
-    source:source,
-    searchResult:searchResult,
-    detail:detail,
-    tree:tree,
-    existTree:existTree,
+    homeBanner:homeBanner,
 });
 
 export default todoApp;

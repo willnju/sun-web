@@ -1,20 +1,13 @@
 /**
- * Created by will on 17/8/15.
+ * Created by will on 18/6/5.
  */
 import React, { Component } from 'react';
 import { Router, Route, IndexRoute, hashHistory, Redirect } from 'react-router';
 import { Provider } from 'react-redux';
 import $ from 'jquery';
-// import { syncHistoryWithStore } from 'react-router-redux';
 
 import store from '../store/index';
-import Search from '../containers/Search';
-import SearchResult from '../containers/SearchResult';
-import PaperDetail from '../containers/PaperDetail';
-import TreeMap from '../containers/TreeMap';
-// const history = syncHistoryWithStore(hashHistory, store);
-// history.listen(() => {});
-
+import HomePage from '../containers/homePage/index';
 let onEnter = () => {
     $('body').animate({ scrollTop: 0 });
 };
@@ -22,10 +15,8 @@ let onEnter = () => {
 const router = (
     <Provider store={store}>
         <Router history={hashHistory}>
-            <Route path='/' component={Search} />
-            <Route path='/search/:linkId/:sourceId/:searchType' component={SearchResult} />
-            <Route path='/detail/:linkId' component={PaperDetail} />
-            <Route path='/tree/:keyWord' component={TreeMap} />
+            <IndexRoute component={HomePage}/>
+            <Route path='/home' components={HomePage}/>
         </Router>
     </Provider>
 )

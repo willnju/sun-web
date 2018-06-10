@@ -1,6 +1,5 @@
 import React from 'react';
 import {render} from 'react-dom';
-import './style/main.css';
-import router from './router/router'
+import HomePage from './containers/homePage/index';
 
-render(router,document.getElementById('root'));
+render(<HomePage/>,document.getElementById('root'));
