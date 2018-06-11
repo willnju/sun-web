@@ -8,6 +8,7 @@ import $ from 'jquery';
 
 import store from '../store/index';
 import HomePage from '../containers/homePage/index';
+import Admin from '../containers/admin/index';
 let onEnter = () => {
     $('body').animate({ scrollTop: 0 });
 };
@@ -16,7 +17,8 @@ const router = (
     <Provider store={store}>
         <Router history={hashHistory}>
             <IndexRoute component={HomePage}/>
-            <Route path='/home' components={HomePage}/>
+            <Route path='/' components={HomePage}/>
+            <Route path='/admin' components={Admin}/>
         </Router>
     </Provider>
 )
