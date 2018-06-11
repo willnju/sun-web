@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {Row} from 'antd';
-import './index.css';
+import './index.scss';
 class BigData extends React.Component{
     render(){
         return(

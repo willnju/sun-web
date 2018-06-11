@@ -45,6 +45,7 @@ module.exports = {
         historyApiFallback: true,
         inline: true,
         hot:true,//热更新
+        port:8888,
         proxy: {
             '/web/*':{
                 'target': 'http://172.26.7.135:8888/',
