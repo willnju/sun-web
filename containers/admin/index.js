@@ -4,13 +4,14 @@
 import React from 'react';
 import {Row} from 'antd';
 import './index.css';
-class BigData extends React.Component{
+
+class Admin extends React.Component{
     render(){
         return(
-            <Row className="admin">
-                首页
+            <Row className="homePage">
+                admin
             </Row>
         )
     }
 }
-export default BigData;
+export default Admin;

@@ -40,6 +40,8 @@ module.exports = {
     },
 
     devServer: {//webpack-dev-server 配置
+        host: 'localhost',
+        port: 8081,
         contentBase: "./server",
         colors: true,
         historyApiFallback: true,
@@ -47,7 +49,7 @@ module.exports = {
         hot:true,//热更新
         proxy: {
             '/semantic/*':{
-                'target': 'http://172.26.7.135:8888/',
+                'target': 'http://localhost:8080/',
                 'secure': false, // 接受 运行在 https 上的服务
                 'changeOrigin': true,
             }
