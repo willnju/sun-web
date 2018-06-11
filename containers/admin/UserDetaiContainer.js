@@ -2,16 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux'
 import MyFetch from "../../utils/MyFetch";
 import UserShow from "../../component/user/UserShow";
-import {SHOW_USERS, SHOW_USERS_ADD_MODAL} from "../../reducers/home";
+import {homeBanner, SHOW_USERS, SHOW_USERS_ADD_MODAL} from "../../reducers/home";
 
 const mapStateToProps = state => ({
-  users:state.users,
-  users_add_modal:state.users_add_modal
+  users:state.homeBanner.users,
+  users_add_modal:state.homeBanner.users_add_modal
 });
 const mapDispatchToProps = dispatch => ({
   onComponentDidMount : () => {
-    MyFetch.get("admin/user/list","pageNum=1&pageSize=3").then(function (res) {
-      console.log(res);
+      const p={
+          pageNum:1,
+          pageSize:3
+      };
+    MyFetch.get("admin/user/list",p).then(function (res) {
+      console.log(res.data.list);
     dispatch(SHOW_USERS(res.data.list))
     })
   },
@@ -32,12 +36,11 @@ const mapDispatchToProps = dispatch => ({
       pageSize:3
     };
     MyFetch.get("admin/user/list",p).then(function (res) {
-      console.log(res);
+      console.log(res.data.list);
       dispatch(SHOW_USERS(res.data.list))
     })
   },
   openAddView : () => {
-
     dispatch(SHOW_USERS_ADD_MODAL(true))
   },
   closeAddView : () => {

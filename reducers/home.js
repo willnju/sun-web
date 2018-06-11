@@ -1,4 +1,4 @@
-export function homeBanner(state=null,action){
+export function homeBanner(state={},action){
     switch (action.type){
         case 'SEARCH_SUCCESS':
             return action.data;

@@ -48,7 +48,7 @@ module.exports = {
         port:8888,
         proxy: {
             '/web/*':{
-                'target': 'http://172.26.7.135:8888/',
+                'target': 'http://172.26.39.240:8888/',
                 'secure': false, // 接受 运行在 https 上的服务
                 'changeOrigin': true,
             }
