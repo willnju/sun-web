@@ -17,7 +17,7 @@ let onEnter = () => {
 const router = (
     <Provider store={store}>
         <Router history={hashHistory}>
-            <IndexRoute component={HomePage}/>
+            <IndexRoute component={Admin}/>
             <Route path='/home' components={HomePage}/>
             <Route path='/admin ' components={Admin}/>
         </Router>
