@@ -34,7 +34,7 @@ export function handleChangePage  (param) {
         dispatch(SHOW_USERS(res.data.list))
     })
 }
-export function   addUsers(param) => {
+export function   addUsers(param)  {
     MyFetch.post("admin/user/add", param)
     const p = {
         pageNum: 1,
@@ -44,15 +44,11 @@ export function   addUsers(param) => {
         console.log(res)
         dispatch(SHOW_USERS(res.data.list))
     })
-},
-export function  openAddView
-:
-() => {
+}
+export function  openAddView()  {
 
     dispatch(SHOW_USERS_ADD_MODAL(true))
-},
-export function  closeAddView
-:
-() => {
+}
+export function  closeAddView(){
     dispatch(SHOW_USERS_ADD_MODAL(false))
-},
+}
