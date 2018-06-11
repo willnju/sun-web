@@ -2,11 +2,16 @@
  * Created by will on 18/6/11.
  */
 import React from 'react';
-import {Row} from 'antd';
+import UserShow from "../../component/user/UserShow";
+import {Button} from "antd/lib/radio/index";
 class Admin extends React.Component{
     render(){
         return(
-            <Row>管理员</Row>
+            <div>
+                <p>ok</p>
+                {/*<Button type="primary">按钮</Button>*/}
+                 {/*<UserShow />*/}
+            </div>
         )
     }
 }
