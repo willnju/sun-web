@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import MyFetch from "../../utils/MyFetch";
-import UserShow from "../../component/user/UserShow";
+import UserShow from "../../component/admin/user/UserShow";
 import {homeBanner, SHOW_USERS, SHOW_USERS_ADD_MODAL} from "../../reducers/home";
 
 const mapStateToProps = state => ({
@@ -30,9 +30,8 @@ const mapDispatchToProps = dispatch => ({
     })
   },
   addUsers : (param) => {
-      console.log(param);
+      console.log("add users param ",param);
     MyFetch.post("admin/user/add",param);
-    debugger
     MyFetch.get("admin/user/list",p).then(function (res) {
       dispatch(SHOW_USERS(res.data.list))
     })

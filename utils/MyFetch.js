@@ -45,14 +45,14 @@ var MyFetch = {
     return new Promise((resolve, reject) => {
       console.log(url)
       fetch(url, {
-        method:"post",
+        method:"POST",
         headers: {
       //       // 'token': localStorage.getItem("my-custom-token"),
       //       // 'Accept': '*/*',
       //
-      'Content-Type': 'application/application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
         },
-        body:params,
+        body:JSON.stringify(params),
       }).then(res => {
         return handleStatus(res);
       })
