@@ -4,9 +4,9 @@ import Divider from "antd/es/divider/index";
 import Icon from "antd/es/icon/index";
 import Button from "antd/es/button/button";
 import Modal from "antd/es/modal/Modal";
-import SimpleForm from "../simple/SimpleForm";
 import List from "antd/es/list/index";
 import Avatar from "antd/es/avatar/index";
+import SimpleForm from "../../user/SimpleForm";
 
 
 const IconText = ({type, text}) => (

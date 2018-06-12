@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Button, Divider, Icon, Modal, Table} from "antd";
 import SimpleForm from "./SimpleForm";
+import AntForm from "./AntForm";
 
 const IconText = ({type, text}) => (
     <span>
@@ -79,7 +80,7 @@ class UserShow extends Component {
                 onCancel={closeAddView}
                 onSubmit={this.addUsers.bind(this)}
                 >
-                <SimpleForm onSubmit={this.addUsers.bind(this)}/>
+                <AntForm handleSubmit={this.addUsers.bind(this)}/>
                 </Modal>
             </div>
         )

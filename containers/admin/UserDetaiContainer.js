@@ -30,13 +30,10 @@ const mapDispatchToProps = dispatch => ({
     })
   },
   addUsers : (param) => {
+      console.log(param);
     MyFetch.post("admin/user/add",param);
-    const p={
-      pageNum:1,
-      pageSize:3
-    };
+    debugger
     MyFetch.get("admin/user/list",p).then(function (res) {
-      console.log(res.data.list);
       dispatch(SHOW_USERS(res.data.list))
     })
   },
