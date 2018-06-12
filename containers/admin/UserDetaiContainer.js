@@ -1,47 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import MyFetch from "../../utils/MyFetch";
+import {connect} from 'react-redux'
 import UserShow from "../../component/admin/user/UserShow";
-import {homeBanner, SHOW_USERS, SHOW_USERS_ADD_MODAL} from "../../reducers/home";
+import {addUsers, closeAddView, handleChangePage, onComponentDidMount, openAddView} from "../../actions/admin";
+import {bindActionCreators} from "redux";
 
 const mapStateToProps = state => ({
   users:state.homeBanner.users,
   users_add_modal:state.homeBanner.users_add_modal
 });
 const mapDispatchToProps = dispatch => ({
-  onComponentDidMount : () => {
-      const p={
-          pageNum:1,
-          pageSize:3
-      };
-    MyFetch.get("admin/user/list",p).then(function (res) {
-      console.log(res.data.list);
-    dispatch(SHOW_USERS(res.data.list))
-    })
-  },
-  handleChangePage : (page) => {
-    const p={
-      pageNum:page,
-      pageSize:3
-    };
-    MyFetch.get("admin/user/list",p).then(function (res) {
-      console.log(res)
-      dispatch(SHOW_USERS(res.data.list))
-    })
-  },
-  addUsers : (param) => {
-      console.log("add users param ",param);
-    MyFetch.post("admin/user/add",param);
-    MyFetch.get("admin/user/list",p).then(function (res) {
-      dispatch(SHOW_USERS(res.data.list))
-    })
-  },
-  openAddView : () => {
-    dispatch(SHOW_USERS_ADD_MODAL(true))
-  },
-  closeAddView : () => {
-    dispatch(SHOW_USERS_ADD_MODAL(false))
-  },
+    onComponentDidMount:bindActionCreators(onComponentDidMount,dispatch),
+    handleChangePage:bindActionCreators(handleChangePage,dispatch),
+    addUsers:bindActionCreators(addUsers,dispatch),
+    openAddView:bindActionCreators(openAddView,dispatch),
+    closeAddView:bindActionCreators(closeAddView,dispatch)
 })
 const UserDetailContainer=connect(mapStateToProps,mapDispatchToProps)(UserShow);
 export default UserDetailContainer

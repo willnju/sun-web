@@ -1,54 +1,54 @@
-import $ from 'jquery';
 import MyFetch from "../../utils/MyFetch";
-
-export function loadBanner(opt = {}) {
-    const {parameter, cb} = opt;
-    return (dispatch, getState) => {
-
-        $.get('/home/banner', parameter)
-            .done(res => {
-                if (res.code == 200) {
-                    dispatch({
-                        type: 'SEARCH_SUCCESS',
-                        data: res.data,
-                    });
-                    cb();
-                } else {
-                    console.log(res.code);
-                }
-            })
+import {SHOW_USERS, SHOW_USERS_ADD_MODAL} from "../../reducers/home";
+import { message } from 'antd';
+export function onComponentDidMount() {
+    return(dispatch)=> {
+        const p = {
+            pageNum: 1,
+            pageSize: 3
+        };
+        MyFetch.get("admin/user/list", p).then(function (res) {
+            console.log(res.data.list);
+            dispatch(SHOW_USERS(res.data.list))
+        })
     }
 }
 
-export function onComponentDidMount(param) {
-    MyFetch.get("admin/user/list", param).then(function (res) {
-        console.log(res)
-        dispatch(SHOW_USERS(res.data.list))
-    })
-}
 
-
-export function handleChangePage  (param) {
-    MyFetch.get("admin/user/list", param).then(function (res) {
-        console.log(res)
-        dispatch(SHOW_USERS(res.data.list))
-    })
+export function handleChangePage  (page) {
+    return (dispatch) =>{
+        const p = {
+            pageNum: page,
+            pageSize: 10
+        };
+        MyFetch.get("admin/user/list", p).then(function (res) {
+            console.log(res)
+            dispatch(SHOW_USERS(res.data.list))
+        })
+    }
 }
 export function   addUsers(param)  {
-    MyFetch.post("admin/user/add", param)
-    const p = {
-        pageNum: 1,
-        pageSize: 3
+    return (dispatch)=> {
+        console.log("add users param ", param);
+        MyFetch.post("admin/user/add", param).then(function (res) {
+            message.error("start");
+            if (res.code = 400) {
+                message.error(res.msg);
+            } else {
+                message.success("ok",1)
+                MyFetch.get("admin/user/list").then(function (res) {
+                    dispatch(SHOW_USERS(res.data.list))
+
+                })
+            }
+            message.error("end");
+
+        });
     }
-    MyFetch.get("admin/user/list", p).then(function (res) {
-        console.log(res)
-        dispatch(SHOW_USERS(res.data.list))
-    })
 }
 export function  openAddView()  {
-
-    dispatch(SHOW_USERS_ADD_MODAL(true))
+   return (dispatch)=>{ dispatch(SHOW_USERS_ADD_MODAL(true))}
 }
 export function  closeAddView(){
-    dispatch(SHOW_USERS_ADD_MODAL(false))
+    return (dispatch)=>{ dispatch(SHOW_USERS_ADD_MODAL(false))}
 }

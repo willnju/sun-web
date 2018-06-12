@@ -1,5 +1,4 @@
 import {message} from 'antd';
-
 // const API_URL ="http://172.26.39.240:8888";
 const API_URL ="http://localhost:8080";
 
@@ -38,21 +37,17 @@ var MyFetch = {
                 });
         });
     },
+
   post(path,params) {
     let url=API_URL+"/"+path;
-    console.log(url)
-    console.log(params)
     return new Promise((resolve, reject) => {
-      console.log(url)
       fetch(url, {
-        method:"POST",
+        method:'POST',
         headers: {
-      //       // 'token': localStorage.getItem("my-custom-token"),
-      //       // 'Accept': '*/*',
-      //
-      'Content-Type': 'application/json',
+            "Content-Type": "application/json"
         },
         body:JSON.stringify(params),
+
       }).then(res => {
         return handleStatus(res);
       })

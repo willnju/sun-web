@@ -41,7 +41,7 @@ class UserShow extends Component {
             <span>
       <a href="javascript:;" style={{hover: "block"}} onClick={this.props.openAddView}>Action 一 {record.name}</a>
       <Divider type="vertical"/>
-      <a href="javascript:;">Delete</a>
+      <a href="javascript:;" onClick={this.props.openUpdateView}>Update</a>
       <Divider type="vertical"/>
       <a href="javascript:;" className="ant-dropdown-link">
         More actions <Icon type="down"/>
