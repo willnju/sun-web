@@ -3,12 +3,13 @@
  */
 import React from 'react';
 import UserDetailContainer from "./UserDetaiContainer";
+import Layout from "../../component/admin/Layout";
 
 class Admin extends React.Component{
     render(){
         return(
             <div>
-                <UserDetailContainer/>
+                <Layout/>
             </div>
         )
     }

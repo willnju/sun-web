@@ -35,7 +35,7 @@ export function   addUsers(param)  {
             if (res.code = 400) {
                 message.error(res.msg);
             } else {
-                message.success("ok",1)
+                message.success("ok",1);
                 MyFetch.get("admin/user/list").then(function (res) {
                     dispatch(SHOW_USERS(res.data.list))
 
