@@ -38,7 +38,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "antd": "^2.12.6",
+    "antd": "^3.5.4",
     "babel-plugin-import": "^1.4.0",
     "echarts": "^2.2.8",
     "jquery": "^3.2.1",

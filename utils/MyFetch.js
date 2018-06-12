@@ -1,6 +1,7 @@
 import {message} from 'antd';
 
-const API_URL ="http://localhost:8080";
+const API_URL ="http://172.26.39.240:8888";
+// const API_URL ="";
 
 var MyFetch = {
     get(path,params) {
@@ -15,9 +16,6 @@ var MyFetch = {
             } else {
                 url += '&' + paramsArray.join('&')
             }
-          //   console.log("param")
-          // console.log(params)
-
         }
 
         return new Promise((resolve, reject) => {

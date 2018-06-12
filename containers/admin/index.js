@@ -2,11 +2,14 @@
  * Created by will on 18/6/11.
  */
 import React from 'react';
-import {Row} from 'antd';
+import UserDetailContainer from "./UserDetaiContainer";
+
 class Admin extends React.Component{
     render(){
         return(
-            <Row>管理员</Row>
+            <div>
+                <UserDetailContainer/>
+            </div>
         )
     }
 }
