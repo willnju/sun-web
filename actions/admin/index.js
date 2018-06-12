@@ -39,7 +39,7 @@ export function   addUsers(param)  {
     const p = {
         pageNum: 1,
         pageSize: 3
-    }
+    };
     MyFetch.get("admin/user/list", p).then(function (res) {
         console.log(res)
         dispatch(SHOW_USERS(res.data.list))
