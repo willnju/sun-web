@@ -13,7 +13,7 @@ class UserShow extends Component {
 
     componentDidMount() {
         console.log("componentDidMount");
-        this.props.onComponentDidMount();
+        this.props.initPage();
     }
 
     addUsers(user) {
@@ -23,6 +23,9 @@ class UserShow extends Component {
     updateUser(user) {
         this.props.closeUpdateView();
         this.props.updateUser(user)
+    }
+    deleteUser(userNo) {
+        this.props.deleteUser(userNo)
     }
 
     openUpdateView(v,e){
@@ -47,9 +50,10 @@ class UserShow extends Component {
         key: 'action',
         render: (text, record) => (
             <span>
-      <a href="javascript:;" style={{hover: "block"}} onClick={this.props.openAddView}>Action 一 {record.userName}</a>
-      <Divider type="vertical"/>
+
       <a href="javascript:;"  onClick={this.openUpdateView.bind(this,record.userNo)}>Update</a>
+      <Divider type="vertical"/>
+                 <a href="javascript:;" style={{hover: "block"}} onClick={this.deleteUser.bind(this,record.userNo)}>删除</a>
       <Divider type="vertical"/>
       <a href="javascript:;" className="ant-dropdown-link">
         More actions <Icon type="down"/>

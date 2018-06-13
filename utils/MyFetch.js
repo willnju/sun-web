@@ -1,12 +1,12 @@
 import {message} from 'antd';
 // const API_URL ="http://172.26.39.240:8888";
-const API_URL ="http://localhost:8080";
+const API_URL = "http://localhost:8080";
 
 var MyFetch = {
-    get(path,params) {
-        var url=API_URL+"/"+path;
+    get(path, params) {
+        var url = API_URL + "/" + path;
         if (params) {
-          console.log(params)
+            console.log(params)
             let paramsArray = [];
             //拼接参数
             Object.keys(params).forEach(key => paramsArray.push(key + '=' + params[key]))
@@ -20,7 +20,7 @@ var MyFetch = {
         return new Promise((resolve, reject) => {
             console.log(url)
             fetch(url, {
-                method:"get",
+                method: "get",
                 // headers: new Headers({
                 //     'token': localStorage.getItem("my-custom-token"),
                 //     'Accept': 'application/json',
@@ -37,28 +37,32 @@ var MyFetch = {
                 });
         });
     },
+    postJson(path, params) {
+        let headers = {
+            "Content-Type": "application/json",
+        }
+        MyFetch.post(path, JSON.stringify(params), headers);
+    },
+    post(path, params,headers) {
+        let url = API_URL + "/" + path;
+        console.log(url)
+        return new Promise((resolve, reject) => {
+            fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: params,
 
-  post(path,params) {
-    let url=API_URL+"/"+path;
-    return new Promise((resolve, reject) => {
-      fetch(url, {
-        method:'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body:JSON.stringify(params),
-
-      }).then(res => {
-        return handleStatus(res);
-      })
-        .then(json => {
-          resolve(json);
-        })
-        .catch(err => {
-          reject(err);
+            }).then(res => {
+                return handleStatus(res);
+            })
+                .then(json => {
+                    resolve(json);
+                })
+                .catch(err => {
+                    reject(err);
+                });
         });
-    });
-  },
+    },
 };
 
 function handleStatus(res) {
@@ -87,4 +91,5 @@ function handleStatus(res) {
         default:
     }
 }
+
 export default MyFetch;

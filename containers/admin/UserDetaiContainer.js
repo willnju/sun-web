@@ -3,9 +3,9 @@ import {connect} from 'react-redux'
 import UserShow from "../../component/admin/user/UserShow";
 import {
     addUsers,
-    closeAddView, closeUpdateView,
+    closeAddView, closeUpdateView, deleteUser,
     handleChangePage,
-    onComponentDidMount,
+    initPage,
     openAddView,
     openUpdateView, updateUser
 } from "../../actions/admin";
@@ -18,10 +18,11 @@ const mapStateToProps = state => ({
     user:state.homeBanner.user
 });
 const mapDispatchToProps = dispatch => ({
-    onComponentDidMount:bindActionCreators(onComponentDidMount,dispatch),
+    initPage:bindActionCreators(initPage,dispatch),
     handleChangePage:bindActionCreators(handleChangePage,dispatch),
     addUsers:bindActionCreators(addUsers,dispatch),
     updateUser:bindActionCreators(updateUser,dispatch),
+    deleteUser:bindActionCreators(deleteUser,dispatch),
     openAddView:bindActionCreators(openAddView,dispatch),
     closeAddView:bindActionCreators(closeAddView,dispatch),
     openUpdateView:bindActionCreators(openUpdateView,dispatch),

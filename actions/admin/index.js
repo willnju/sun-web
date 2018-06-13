@@ -1,11 +1,11 @@
 import MyFetch from "../../utils/MyFetch";
 import {SHOW_USERS, SHOW_USERS_ADD_MODAL, SHOW_USERS_UPDATE_MODAL, USER_INFO} from "../../reducers/home";
 import { message } from 'antd';
-export function onComponentDidMount() {
+export function initPage() {
     return(dispatch)=> {
         const p = {
             pageNum: 1,
-            pageSize: 3
+            pageSize: 10
         };
         MyFetch.get("admin/user/list", p).then(function (res) {
             console.log(res.data.list);
@@ -30,38 +30,47 @@ export function handleChangePage  (page) {
 export function   addUsers(param)  {
     return (dispatch)=> {
         console.log("add users param ", param);
-        MyFetch.post("admin/user/add", param).then(function (res) {
-            message.error("start");
+        MyFetch.postJson("admin/user/add", param).then(function (res) {
             if (res.code = 400) {
                 message.error(res.msg);
             } else {
                 message.success("ok",1);
                 MyFetch.get("admin/user/list").then(function (res) {
                     dispatch(SHOW_USERS(res.data.list))
-
                 })
             }
-            message.error("end");
-
         });
     }
 }
 export function   updateUser(param)  {
     return (dispatch)=> {
         console.log("update users param ", param);
-        MyFetch.post("admin/user/add", param).then(function (res) {
-            message.error("start");
+        MyFetch.postJson("admin/user/update",param).then(function (res) {
             if (res.code = 400) {
                 message.error(res.msg);
             } else {
                 message.success("ok",1);
-                MyFetch.get("admin/user/update").then(function (res) {
-                    dispatch(SHOW_USERS(res.data.list))
-
-                })
+                initPage();
+``            }
+        });
+    }
+}
+export function   deleteUser(userNo)  {
+    return (dispatch)=> {
+        let p={
+            userNo:userNo
+        }
+        console.log("delete user ",p);
+        // let h={
+        //     "Content-Type": "application/json",
+        // }
+        MyFetch.post("admin/user/delete",p).then(function (res) {
+            if (res.code = 400) {
+                message.error(res.msg);
+            } else {
+                message.success("ok", 1);
+                initPage();
             }
-            message.error("end");
-
         });
     }
 }
@@ -79,10 +88,8 @@ export function  openUpdateView(data)  {
             }
             console.log("open user info  ", param);
             MyFetch.get("admin/user/info", param).then(function (res) {
-                message.error("start");
                     console.log(res.data)
-                        dispatch(SHOW_USERS_UPDATE_MODAL(true,res.data))
-                message.error("end");
+                dispatch(SHOW_USERS_UPDATE_MODAL(true,res.data))
 
             });
         }
