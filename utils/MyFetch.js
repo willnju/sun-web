@@ -41,7 +41,7 @@ var MyFetch = {
         let headers = {
             "Content-Type": "application/json",
         }
-        MyFetch.post(path, JSON.stringify(params), headers);
+        return MyFetch.post(path, JSON.stringify(params), headers);
     },
     post(path, params,headers) {
         let url = API_URL + "/" + path;

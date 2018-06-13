@@ -1,16 +1,21 @@
 import MyFetch from "../../utils/MyFetch";
 import {SHOW_USERS, SHOW_USERS_ADD_MODAL, SHOW_USERS_UPDATE_MODAL, USER_INFO} from "../../reducers/home";
 import { message } from 'antd';
+
+function init(p, dispatch) {
+    MyFetch.get("admin/user/list", p).then(function (res) {
+        console.log(res.data.list);
+        dispatch(SHOW_USERS(res.data.list))
+    })
+}
+
 export function initPage() {
     return(dispatch)=> {
         const p = {
             pageNum: 1,
             pageSize: 10
         };
-        MyFetch.get("admin/user/list", p).then(function (res) {
-            console.log(res.data.list);
-            dispatch(SHOW_USERS(res.data.list))
-        })
+        init(p, dispatch);
     }
 }
 
@@ -35,10 +40,8 @@ export function   addUsers(param)  {
                 message.error(res.msg);
             } else {
                 message.success("ok",1);
-                MyFetch.get("admin/user/list").then(function (res) {
-                    dispatch(SHOW_USERS(res.data.list))
-                })
             }
+            init(dispatch);
         });
     }
 }
@@ -49,9 +52,9 @@ export function   updateUser(param)  {
             if (res.code = 400) {
                 message.error(res.msg);
             } else {
-                message.success("ok",1);
-                initPage();
-``            }
+                message.success("ok", 1);
+                init(dispatch);
+            }
         });
     }
 }
@@ -69,7 +72,7 @@ export function   deleteUser(userNo)  {
                 message.error(res.msg);
             } else {
                 message.success("ok", 1);
-                initPage();
+                init(dispatch);
             }
         });
     }
