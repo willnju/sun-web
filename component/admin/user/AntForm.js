@@ -74,6 +74,7 @@ class RegistrationForm extends React.Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
+        const {user}=this.props;
         const {autoCompleteResult} = this.state;
         const formItemLayout = {
             labelCol: {
@@ -102,7 +103,7 @@ class RegistrationForm extends React.Component {
         ));
 
         return (
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit.bind(this)}>
                 <FormItem
                     {...formItemLayout}
                     label="邮箱"
@@ -113,6 +114,7 @@ class RegistrationForm extends React.Component {
                         }, {
                             required: false, message: 'Please input your E-mail!',
                         }],
+                        initialValue:user?user.email:"",
                     })(
                         <Input/>
                     )}
@@ -130,6 +132,7 @@ class RegistrationForm extends React.Component {
                 >
                     {getFieldDecorator('userNo', {
                         rules: [{required: false, message: 'Please input your userno!', whitespace: true}],
+                        initialValue:user?user.userNo:"",
                     })(
                         <Input/>
                     )}
@@ -147,6 +150,7 @@ class RegistrationForm extends React.Component {
                 >
                     {getFieldDecorator('userName', {
                         rules: [{required: false, message: 'Please input your name!', whitespace: true}],
+                        initialValue:user?user.userName:"",
                     })(
                         <Input/>
                     )}

@@ -16,11 +16,19 @@ class UserShow extends Component {
         this.props.onComponentDidMount();
     }
 
-    addUsers(data) {
+    addUsers(user) {
         this.props.closeAddView();
-        this.props.addUsers(data)
+        this.props.addUsers(user)
+    }
+    updateUser(user) {
+        this.props.closeUpdateView();
+        this.props.updateUser(user)
     }
 
+    openUpdateView(v,e){
+        console.log(v)
+        this.props.openUpdateView(v)
+    }
     columns = [{
         title: 'userName',
         dataIndex: 'userName',
@@ -39,9 +47,9 @@ class UserShow extends Component {
         key: 'action',
         render: (text, record) => (
             <span>
-      <a href="javascript:;" style={{hover: "block"}} onClick={this.props.openAddView}>Action 一 {record.name}</a>
+      <a href="javascript:;" style={{hover: "block"}} onClick={this.props.openAddView}>Action 一 {record.userName}</a>
       <Divider type="vertical"/>
-      <a href="javascript:;" onClick={this.props.openUpdateView}>Update</a>
+      <a href="javascript:;"  onClick={this.openUpdateView.bind(this,record.userNo)}>Update</a>
       <Divider type="vertical"/>
       <a href="javascript:;" className="ant-dropdown-link">
         More actions <Icon type="down"/>
@@ -51,13 +59,15 @@ class UserShow extends Component {
     }];
 
     render() {
-        const {users, handleChangePage, openAddView, closeAddView, users_add_modal} = this.props;
+        const {users, handleChangePage, openAddView,
+            closeAddView, users_add_modal,user_update_modal,
+        closeUpdateView,user} = this.props;
         const page = {
             onChange: handleChangePage,
             defaultCurrent: 1,
             total: 50
         };
-        console.log(users);
+        console.log("u",user)
         return (
             <div>
                 <Button type="primary" onClick={openAddView}>新增人员</Button>
@@ -73,13 +83,18 @@ class UserShow extends Component {
 
                 />
                 <Modal
-                title="Basic Modal"
+                title="Add Modal"
                 visible={users_add_modal}
-                onOk={this.addUsers.bind(this)}
                 onCancel={closeAddView}
-                onSubmit={this.addUsers.bind(this)}
                 >
-                <WrappedRegistrationForm addUsers={this.addUsers.bind(this)}/>
+                <WrappedRegistrationForm handleAction={this.addUsers.bind(this)}/>
+                </Modal>
+                <Modal
+                    title="Update Modal"
+                    visible={user_update_modal}
+                    onCancel={closeUpdateView}
+                >
+                    <WrappedRegistrationForm user={user} handleAction={this.updateUser.bind(this)}/>
                 </Modal>
             </div>
         )
