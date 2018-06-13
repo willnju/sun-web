@@ -12,10 +12,10 @@ import {
 import {bindActionCreators} from "redux";
 
 const mapStateToProps = state => ({
-  users:state.homeBanner.users,
-  users_add_modal:state.homeBanner.users_add_modal,
-    user_update_modal:state.homeBanner.users_update_modal,
-    user:state.homeBanner.user
+  users:state.admin.users,
+  users_add_modal:state.admin.users_add_modal,
+    user_update_modal:state.admin.users_update_modal,
+    user:state.admin.user
 });
 const mapDispatchToProps = dispatch => ({
     initPage:bindActionCreators(initPage,dispatch),
@@ -28,5 +28,5 @@ const mapDispatchToProps = dispatch => ({
     openUpdateView:bindActionCreators(openUpdateView,dispatch),
     closeUpdateView:bindActionCreators(closeUpdateView,dispatch)
 })
-const UserDetailContainer=connect(mapStateToProps,mapDispatchToProps)(UserShow);
-export default UserDetailContainer
+const UserContainer=connect(mapStateToProps,mapDispatchToProps)(UserShow);
+export default UserContainer

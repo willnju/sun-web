@@ -2,12 +2,6 @@ import MyFetch from "../../utils/MyFetch";
 import {SHOW_USERS, SHOW_USERS_ADD_MODAL, SHOW_USERS_UPDATE_MODAL, USER_INFO} from "../../reducers/home";
 import { message } from 'antd';
 
-function init(p, dispatch) {
-    MyFetch.get("admin/user/list", p).then(function (res) {
-        console.log(res.data.list);
-        dispatch(SHOW_USERS(res.data.list))
-    })
-}
 
 export function initPage() {
     return(dispatch)=> {
@@ -17,6 +11,12 @@ export function initPage() {
         };
         init(p, dispatch);
     }
+}
+function init(p, dispatch) {
+    MyFetch.get("admin/user/list", p).then(function (res) {
+        console.log(res.data.list);
+        dispatch(SHOW_USERS(res.data.list))
+    })
 }
 
 
@@ -53,27 +53,20 @@ export function   updateUser(param)  {
                 message.error(res.msg);
             } else {
                 message.success("ok", 1);
-                init(dispatch);
             }
+            init(dispatch);
         });
     }
 }
 export function   deleteUser(userNo)  {
     return (dispatch)=> {
-        let p={
-            userNo:userNo
-        }
-        console.log("delete user ",p);
-        // let h={
-        //     "Content-Type": "application/json",
-        // }
-        MyFetch.post("admin/user/delete",p).then(function (res) {
+        MyFetch.post("admin/user/delete",userNo).then(function (res) {
             if (res.code = 400) {
                 message.error(res.msg);
             } else {
                 message.success("ok", 1);
-                init(dispatch);
             }
+            init(dispatch);
         });
     }
 }

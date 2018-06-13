@@ -2,6 +2,12 @@ export function homeBanner(state={},action){
     switch (action.type){
         case 'SEARCH_SUCCESS':
             return action.data;
+        default:
+            return state;
+    }
+}
+export function admin(state={},action){
+    switch (action.type){
         case SHOWUER:
             return{
                 ...state,

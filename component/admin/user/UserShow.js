@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Button, Divider, Icon, Modal, Table} from "antd";
 import WrappedRegistrationForm from "./AntForm";
+import UploadAvatar from "./UploadAvatar";
 
 const IconText = ({type, text}) => (
     <span>
@@ -74,6 +75,7 @@ class UserShow extends Component {
         console.log("u",user)
         return (
             <div>
+                <UploadAvatar/>
                 <Button type="primary" onClick={openAddView}>新增人员</Button>
                 <Table columns={this.columns} dataSource={
                     users} pagination={page}
