@@ -13,6 +13,7 @@ import Admin from '../containers/admin/index';
 import UserContainer from "../containers/admin/UserContainer";
 import Layout from "../component/admin/Layout";
 import ArticleContainer from "../containers/admin/ArticleContainer";
+import Article from "../component/admin/article/Article";
 let onEnter = () => {
     $('body').animate({ scrollTop: 0 });
 };
@@ -27,7 +28,7 @@ const router = (
             <Route path='/admin' components={Admin}/>
             <Route path='/layout' components={Layout}/>
             <Route path='/user' components={UserContainer}/>
-            <Route path='/article' components={ArticleContainer}/>
+            <Route path='/article' components={Article}/>
         </Router>
     </Provider>
 )

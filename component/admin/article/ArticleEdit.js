@@ -61,10 +61,6 @@ class ArticleEdit extends React.Component {
             fileList: responseList,
             data: (file) => {
                 console.log(file.name)
-                //自定义上传参数，这里使用UPYUN
-                // return {
-                //     filename: "filename",
-                // }
             },
             multiple: true,
             beforeUpload: this.beforeUpload,
@@ -77,17 +73,6 @@ class ArticleEdit extends React.Component {
                 <LzEditor active={true} importContent={htmlContent} cbReceiver={this.receiveHtml.bind(this)} uploadProps={uploadProps}
                           lang="en"/>
                 <br/>
-                <Button onClick={this.onClick.bind(this,htmlContent)}>提交</Button>
-                {/*<div>Editor demo 2 (use markdown format ):*/}
-                {/*</div>*/}
-                {/*<LzEditor*/}
-                    {/*active={true}*/}
-                    {/*importContent={markdownContent}*/}
-                    {/*cbReceiver={markdownContent}*/}
-                    {/*image={false}*/}
-                    {/*video={false}*/}
-                    {/*audio={false}*/}
-                    {/*convertFormat="markdown"/>*/}
             </div>
         );
     }
