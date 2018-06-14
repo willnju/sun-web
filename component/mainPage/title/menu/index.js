@@ -9,7 +9,7 @@ class Menu extends React.Component{
         super();
         this.state={
             current_tab:0,
-            tabs:['首页',"风采","成员","联系我们"]
+            tabs:['首页',"风采","成员","成果","联系我们",]
         }
     }
     handelClick = e =>{
