@@ -1,6 +1,7 @@
 import React from 'react'
 import LzEditor from "react-lz-editor";
-import {Button} from "antd";
+import {Button, Input} from "antd";
+import Attach from "./Attach";
 
 class ArticleEdit extends React.Component {
     receiveHtml(content) {
@@ -68,11 +69,12 @@ class ArticleEdit extends React.Component {
         };
         return (
             <div>
-                <div>Editor demo 1 (use default html format ):
-                </div>
+                题名：
+                <Input value="题名" id="input"/>
                 <LzEditor active={true} importContent={htmlContent} cbReceiver={this.receiveHtml.bind(this)} uploadProps={uploadProps}
                           lang="en"/>
-                <br/>
+                <Attach/>
+                <Button >提交</Button>
             </div>
         );
     }

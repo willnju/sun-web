@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button, Input} from "antd";
 import ArticleEditContainer from "../../../containers/admin/ArticleContainer";
+import Attach from "./Attach";
 
 class Article extends React.Component {
     onClick(){
@@ -12,6 +13,7 @@ class Article extends React.Component {
                 题名：
                 <Input value="题名" id="input"/>
                 <ArticleEditContainer/>
+                <Attach/>
                 <Button >提交</Button>
             </div>
         );
