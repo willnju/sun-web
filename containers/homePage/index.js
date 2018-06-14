@@ -3,16 +3,22 @@
  */
 import React from 'react';
 import {Row} from 'antd';
-import './index.scss';
-import {Link} from "react-router";
-class BigData extends React.Component{
+import Title from '../../component/homePage/title'
+import Banner from '../../component/homePage/banner';
+import "./index.scss";
+class Home extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
     render(){
         return(
-            <Row className="admin">
-                首页
-                <li><Link to="/admin">管理员界面</Link></li>
+            <Row className="home">
+                <Row className="home-title"><Title/></Row>
+                <Row className="home-banner"><Banner/></Row>
             </Row>
         )
     }
 }
-export default BigData;
+export default Home;

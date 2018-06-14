@@ -1,0 +1,28 @@
+$menu-height:60px;//定义菜单栏高度
+.title{
+  font-size: 16px;
+  height: $menu-height;
+  text-align: center;
+  margin: 0 100px;
+  line-height: $menu-height;
+  .title-logo{
+    background-image: url("../../../img/logo.jpg");
+    background-repeat: no-repeat;
+    background-size:100%100%;
+    //background-image: url('img/logo.jpeg');
+  }
+  .menu-tab{
+    color: black;
+    padding: 8px 30px;
+    border-radius:20px;
+    &:hover{
+      background-color: #c40000;
+      color: white;
+      cursor: pointer;
+    }
+  }
+  .active{
+    background-color: #c40000;
+    color: white;
+  }
+}
