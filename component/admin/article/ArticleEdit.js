@@ -1,5 +1,5 @@
 import React from 'react'
-import {LzEditor} from "react-lz-editor";
+import LzEditor from "react-lz-editor";
 
 class ArticleEdit extends React.Component {
     constructor(props) {

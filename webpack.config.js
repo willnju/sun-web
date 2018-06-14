@@ -23,14 +23,22 @@ module.exports = {
               }
           },
           {
+              test: /\.less$/,
+              loader: 'style!css!less'
+          },
+          {
               test:/\.css$/,//css loader
-              loader:'style!css?!postcss'
-              // loader:'style!css?modules!postcss'//css模块化
+              loader:'style-loader!css-loader!postcss-loader'
+              // loader:'style!css'//css模块化
           },
           {
               test: /\.(png|jpg|gif)$/,
               loader: 'url-loader'
           },
+          {test: /\.(eot|ttf|svg)/,loader : 'file?prefix=font/'},
+          // {test: /\.ttf/, loader : 'file?prefix=font/'},
+          // {test: /\.svg/, loader : 'file?prefix=font/'},
+          {test: /\.woff/,loader : 'file?prefix=font/&limit=10000&mimetype=application/font-woff'},
           {
               test: /\.scss$/,
               loader:'style!css!sass'
