@@ -1,11 +1,13 @@
 $menu-height:60px;//定义菜单栏高度
-.title{
+.main-title{
   font-size: 16px;
   height: $menu-height;
   text-align: center;
-  margin: 0 100px;
   line-height: $menu-height;
   .title-logo{
+    height: 100%;
+    width: 117px;
+    float: right;
     background-image: url("../../../img/logo.jpg");
     background-repeat: no-repeat;
     background-size:100%100%;

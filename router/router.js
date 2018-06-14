@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import $ from 'jquery';
 
 import store from '../store/index';
+import MainPage from '../containers';
 import HomePage from '../containers/homePage/index';
 import Admin from '../containers/admin/index';
 import UserContainer from "../containers/admin/UserContainer";
@@ -19,11 +20,11 @@ let onEnter = () => {
 const router = (
     <Provider store={store}>
         <Router history={hashHistory}>
-            <IndexRoute component={HomePage}/>
-            <Route path='/' components={HomePage}>
+            <Route path='/' components={MainPage}>
+                <IndexRoute component={HomePage}/>
+                <Route path='/home' components={HomePage}/>
             </Route>
-            <Route path='/admin' components={Admin}>
-            </Route>
+            <Route path='/admin' components={Admin}/>
             <Route path='/layout' components={Layout}/>
             <Route path='/user' components={UserContainer}/>
             <Route path='/article' components={ArticleContainer}/>

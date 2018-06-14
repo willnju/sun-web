@@ -1,0 +1,35 @@
+.footer{
+  background-color: #222f49;
+  border: 1px transparent solid;
+  width: 100%;
+  font-size: 12px;
+  .link,.team-info{
+    width: 1000px;
+    margin: 0 auto;
+  }
+  .team-info{
+    border-top: 1px #999 solid;
+    .copyright,.address{
+      margin: 10px 0;
+      text-align: center;
+      color: #999;
+    }
+  }
+  .link{
+    margin-top: 30px;
+    .link-title{color: white}
+    .link-area{
+      display: flex;
+      flex-wrap:wrap;
+      padding: 0;
+      .link-name{
+        line-height: 28px;
+        padding-right: 30px;
+        list-style: none;
+        display: list-item;
+        color: #999;
+        cursor: pointer;
+      }
+    }
+  }
+}
