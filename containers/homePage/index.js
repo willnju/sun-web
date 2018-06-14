@@ -3,8 +3,9 @@
  */
 import React from 'react';
 import {Row} from 'antd';
-import Title from '../../component/homePage/title'
 import Banner from '../../component/homePage/banner';
+import AboutUs from '../../component/homePage/aboutUs';
+import Content from '../../component/homePage/content';
 import "./index.scss";
 class Home extends React.Component{
     constructor(props) {
@@ -14,10 +15,13 @@ class Home extends React.Component{
     }
     render(){
         return(
-            <Row className="home">
-                <Row className="home-title"><Title/></Row>
+            <div className="home-page">
                 <Row className="home-banner"><Banner/></Row>
-            </Row>
+                <div className="home-description">
+                    <Content/>
+                    <AboutUs/>
+                </div>
+            </div>
         )
     }
 }
