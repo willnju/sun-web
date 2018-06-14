@@ -6,7 +6,7 @@ import {Row} from 'antd';
 import Title from '../../component/homePage/title'
 import Banner from '../../component/homePage/banner';
 import "./index.scss";
-class BigData extends React.Component{
+class Home extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -21,4 +21,4 @@ class BigData extends React.Component{
         )
     }
 }
-export default BigData;
+export default Home;
