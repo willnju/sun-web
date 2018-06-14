@@ -46,11 +46,11 @@ class UploadAvatar extends React.Component {
         const imageUrl = this.state.imageUrl;
         return (
             <Upload
-                name="avatar"
+                name="file"
                 listType="picture-card"
                 className="avatar-uploader"
                 showUploadList={false}
-                action="http://localhost:8080/admin/user/upload/avatar"
+                action="http://localhost:8080/file/upload/avatar"
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
             >
