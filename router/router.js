@@ -9,6 +9,9 @@ import $ from 'jquery';
 import store from '../store/index';
 import HomePage from '../containers/homePage/index';
 import Admin from '../containers/admin/index';
+import UserContainer from "../containers/admin/UserContainer";
+import Layout from "../component/admin/Layout";
+import ArticleContainer from "../containers/admin/ArticleContainer";
 let onEnter = () => {
     $('body').animate({ scrollTop: 0 });
 };
@@ -17,8 +20,13 @@ const router = (
     <Provider store={store}>
         <Router history={hashHistory}>
             <IndexRoute component={HomePage}/>
-            <Route path='/' components={HomePage}/>
-            <Route path='/admin' components={Admin}/>
+            <Route path='/' components={HomePage}>
+            </Route>
+            <Route path='/admin' components={Admin}>
+            </Route>
+            <Route path='/layout' components={Layout}/>
+            <Route path='/user' components={UserContainer}/>
+            <Route path='/article' components={ArticleContainer}/>
         </Router>
     </Provider>
 )
