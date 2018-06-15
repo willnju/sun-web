@@ -30,28 +30,6 @@ class ArticleEdit extends React.Component {
                 return file;
             }
         });
-        // let _this = this;
-        //
-        // // filtering successed files
-        // //按照服务器返回信息筛选成功上传的文件
-        // currFileList = currFileList.filter((file) => {
-        //     //multiple uploading?
-        //     //根据多选选项更新添加内容
-        //     let hasNoExistCurrFileInUploadedList = !~findIndex(_this.state.responseList, item => item.name === file.name)
-        //     if (hasNoExistCurrFileInUploadedList) {
-        //         if (!!_this.props.isMultiple == true) {
-        //             _this.state.responseList.push(file);
-        //         } else {
-        //             _this.state.responseList = [file];
-        //         }
-        //     }
-        //     return !!file.response || (!!file.url && file.status == "done") || file.status == "uploading";
-        // });
-        // currFileList = uniqBy(currFileList, "name");
-        // if (!!currFileList && currFileList.length != 0) {
-        //     this.setState({responseList: currFileList});
-        // }
-        // _this.forceUpdate();
     }
     render() {
         let policy = "";
