@@ -6,6 +6,7 @@ import Attach from "./Attach";
 class ArticleEdit extends React.Component {
     receiveHtml(content) {
         console.log("recieved HTML content", content);
+        debugger;
         this.props.receiveHtml(content);
     }
     onClick(content,e) {
