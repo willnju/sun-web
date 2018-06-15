@@ -4,14 +4,24 @@ import {Button, Input} from "antd";
 import Attach from "./Attach";
 import TagInput from "./TagInput";
 
-class ArticleEdit extends React.Component {
+class ArticleEdit extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            input:'',
+        }
+    }
     receiveHtml(content) {
         console.log("recieved HTML content", content);
-        this.props.receiveHtml(content);
+        this.setState({
+            input:content,
+        })
+        // this.props.receiveHtml(content);
     }
-    onClick(content,e) {
-        console.log("recieved HTML content", content);
-        this.props.receiveHtml(content);
+    onClick=()=> {
+        const {input} = this.state;
+        console.log("recieved HTML content",input);
+        this.props.receiveHtml(input);
     }
     onChange(info) {
         let currFileList = info.fileList;
@@ -55,7 +65,7 @@ class ArticleEdit extends React.Component {
                 <Attach/>
                 <TagInput/>
                 <br/>
-                <Button >提交</Button>
+                <Button onClick={this.onClick}>提交</Button>
             </div>
         );
     }
