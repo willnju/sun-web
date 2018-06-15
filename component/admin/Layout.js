@@ -1,6 +1,5 @@
 import React from 'react';
 import { Menu, Icon, Button } from 'antd';
-import UserShow from "./user/UserShow";
 const SubMenu = Menu.SubMenu;
 
 class Layout extends React.Component {

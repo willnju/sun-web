@@ -3,14 +3,26 @@ import {Button, Icon, Upload} from "antd";
 
 class Attach extends React.Component {
     render() {
+        const pref='http://172.26.39.240:8888';
         const props = {
-            action: 'http://localhost:8080/file/upload/picture',
+            action: pref+'/file/upload/picture',
+            onRemove(file){
+            console.log("remove",file);
+            },
             onChange({ file, fileList }) {
                 if (file.status !== 'uploading') {
-                    file.url=file.response.data;
-                    console.log("file",file);
-                    console.log("filelist",fileList)
+                fileList = fileList.map((file,index) => {
+                    if (file.response) {
+                        // Component will show file.url as link
+                        console.log(file.response.code)
+                        if(file.response.code==200) {
+                            file.url = pref + file.response.data;
+                        }
+                    }
+                    return file;
+                });
                 }
+                console.log(fileList);
             },
             defaultFileList: [{
                 uid: 1,

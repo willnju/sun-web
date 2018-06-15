@@ -2,6 +2,7 @@ import React from 'react'
 import LzEditor from "react-lz-editor";
 import {Button, Input} from "antd";
 import Attach from "./Attach";
+import TagInput from "./TagInput";
 
 class ArticleEdit extends React.Component {
     receiveHtml(content) {
@@ -74,6 +75,8 @@ class ArticleEdit extends React.Component {
                 <LzEditor active={true} importContent={htmlContent} cbReceiver={this.receiveHtml.bind(this)} uploadProps={uploadProps}
                           lang="en"/>
                 <Attach/>
+                <TagInput/>
+                <br/>
                 <Button >提交</Button>
             </div>
         );
