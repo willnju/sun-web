@@ -7,7 +7,9 @@ class Attach extends React.Component {
             action: 'http://localhost:8080/file/upload/picture',
             onChange({ file, fileList }) {
                 if (file.status !== 'uploading') {
-                    console.log(file, fileList);
+                    file.url=file.response.data;
+                    console.log("file",file);
+                    console.log("filelist",fileList)
                 }
             },
             defaultFileList: [{
