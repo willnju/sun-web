@@ -1,9 +1,11 @@
 /**
  * Created by will on 18/6/12.
  */
+import React from 'react';
 import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+import {Link} from "react-router";
 
 class Sider extends React.Component {
     handleClick = (e) => {
@@ -20,8 +22,8 @@ class Sider extends React.Component {
             >
                 <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
                     <MenuItemGroup key="g1" title="Item 1">
-                        <Menu.Item key="1">Option 1</Menu.Item>
-                        <Menu.Item key="2">Option 2</Menu.Item>
+                        <Menu.Item key="1"><Link to="/admin/user">用户管理</Link></Menu.Item>
+                        <Menu.Item key="2"><Link to="/admin/article">article管理</Link></Menu.Item>
                     </MenuItemGroup>
                     <MenuItemGroup key="g2" title="Item 2">
                         <Menu.Item key="3">Option 3</Menu.Item>
@@ -47,4 +49,4 @@ class Sider extends React.Component {
     }
 }
 
-ReactDOM.render(<Sider />, mountNode);
+export default Sider

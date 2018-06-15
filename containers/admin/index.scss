@@ -1,0 +1,15 @@
+.admin{
+    color: rebeccapurple;
+    .right{
+        display: inline-block;
+    }
+    .left{
+        display: inline-block;
+        position: absolute;
+        width: calc(100% - 256px);
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+}

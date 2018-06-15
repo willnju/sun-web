@@ -27,15 +27,16 @@ const router = (
                 <IndexRoute component={HomePage}/>
                 <Route path='/home' components={HomePage}/>
             </Route>
-            <Route path='/admin' components={Admin}/>
-            <Route path='/admin/user/:userNo' components={UserDetail}/>
-            <Route path='/admin/article/edit' components={ArticleEditContainer}/>
+            <Route path='/admin' components={Admin}>
+                <Route path='/admin/user/:userNo' components={UserDetail}/>
+                <Route path='/admin/article/edit' components={ArticleEditContainer}/>
 
-            <Route path='/admin/layout' components={Layout}/>
-            <Route path='/admin/user' components={UserContainer}/>
-            <Route path='/admin/article' components={Article}/>
+                <Route path='/admin/layout' components={Layout}/>
+                <Route path='/admin/user' components={UserContainer}/>
+                <Route path='/admin/article' components={Article}/>
+            </Route>
         </Router>
     </Provider>
 )
 
-export default router;
+export default router
