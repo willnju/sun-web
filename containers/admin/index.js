@@ -10,9 +10,9 @@ class Admin extends React.Component{
     render(){
         return(
             <div>
-                <li><Link to="/user">用户管理</Link></li>
-                <li><Link to="/layout">布局管理</Link></li>
-                <li><Link to="/article">article管理</Link></li>
+                <li><Link to="/admin/user">用户管理</Link></li>
+                <li><Link to="/admin/layout">布局管理</Link></li>
+                <li><Link to="/admin/article">article管理</Link></li>
 
             </div>
         )

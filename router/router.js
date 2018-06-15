@@ -31,9 +31,9 @@ const router = (
             <Route path='/admin/user/:userNo' components={UserDetail}/>
             <Route path='/admin/article/edit' components={ArticleEditContainer}/>
 
-            <Route path='/layout' components={Layout}/>
-            <Route path='/user' components={UserContainer}/>
-            <Route path='/article' components={Article}/>
+            <Route path='/admin/layout' components={Layout}/>
+            <Route path='/admin/user' components={UserContainer}/>
+            <Route path='/admin/article' components={Article}/>
         </Router>
     </Provider>
 )

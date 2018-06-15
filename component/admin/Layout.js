@@ -26,7 +26,7 @@ class Layout extends React.Component {
                 >
                     <Menu.Item key="1">
                         <Icon type="pie-chart" />
-                        <span>Option 1
+                        <span >Option 1
                         </span>
                     </Menu.Item>
                     <Menu.Item key="2">
