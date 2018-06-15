@@ -1,5 +1,6 @@
 import React from 'react';
 import {Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete} from 'antd';
+import UploadAvatar from "./UploadAvatar";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -143,6 +144,7 @@ class RegistrationForm extends React.Component {
                         <Input/>
                     )}
                 </FormItem>
+                <UploadAvatar/>
                 <FormItem {...tailFormItemLayout}>
                     <Button type="primary" htmlType="submit">Register</Button>
                 </FormItem>

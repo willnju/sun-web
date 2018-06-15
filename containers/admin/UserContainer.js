@@ -3,17 +3,22 @@ import {connect} from 'react-redux'
 import UserShow from "../../component/admin/user/UserShow";
 import {
     addUsers,
-    closeAddView, closeUpdateView, deleteUser,
+    closeAddView,
+    closeUpdateView,
+    deleteUser,
     handleChangePage,
     initPage,
     openAddView,
-    openUpdateView, updateUser
-} from "../../actions/admin";
+    openUpdateView,
+    updateUser
+} from "../../actions/admin/user";
 import {bindActionCreators} from "redux";
 
 const mapStateToProps = state => ({
   users:state.admin.users,
-  users_add_modal:state.admin.users_add_modal,
+   users_page:state.admin.users_page,
+
+    users_add_modal:state.admin.users_add_modal,
     user_update_modal:state.admin.users_update_modal,
     user:state.admin.user
 });

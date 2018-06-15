@@ -13,17 +13,21 @@ export function admin(state = {}, action) {
             return {
                 ...state,
                 users: action.users,
+                users_page:action.users_page,
             };
         case ADD_USER_MODAL:
             return {
                 ...state,
-                users_add_modal: action.users_add_modal
+                users_add_modal: action.users_add_modal,
+                user: action.user,
+                users_page:action.users_page,
             };
         case UPDATE_USER_MODAL:
             return {
                 ...state,
                 users_update_modal: action.users_update_modal,
                 user: action.user,
+                users_page:action.users_page,
             };
         case USER:
             return {
@@ -35,7 +39,7 @@ export function admin(state = {}, action) {
     }
 }
 
-export function article(state = {}, action) {
+export function articleEdit(state = {}, action) {
     switch (action.type) {
         case ARTICLE_HTML_CONTENT:
             return {
@@ -57,6 +61,18 @@ export function article(state = {}, action) {
     }
 }
 
+export function articles(state = {}, action) {
+    switch (action.type) {
+        case SHOWARTICLES:
+            return {
+                ...state,
+                articles: action.articles,
+                articles_page:action.articles_page,
+            };
+        default:
+            return state;
+    }
+}
 const SHOWUER = 'showusers'
 const ADD_USER_MODAL = 'add_user_modal'
 const UPDATE_USER_MODAL = 'update_user_modal'
@@ -66,12 +82,15 @@ const ARTICLE_HTML_CONTENT = "article_html_content"
 const ARTICLE_MARKDOWN = "article_markdown";
 const ARTICLE_RESPONSE_LIST = "article_response_list";
 
-export const SHOW_USERS = (users) => ({type: SHOWUER, users: users});
+const SHOWARTICLES = 'show_articles'
+
+export const SHOW_USERS = (users,page) => ({type: SHOWUER, users: users,users_page:page});
 export const SHOW_USERS_ADD_MODAL = (status) => ({type: ADD_USER_MODAL, users_add_modal: status})
-export const SHOW_USERS_UPDATE_MODAL = (status, data) => ({
+export const SHOW_USERS_UPDATE_MODAL = (status, user,page) => ({
     type: UPDATE_USER_MODAL,
     users_update_modal: status,
-    user: data
+    user: user,
+    users_page:page
 })
 export const USER_INFO = (user) => ({type: USER, user: user});
 
@@ -79,3 +98,4 @@ export const HTML_CONTENT = (content) => ({type: ARTICLE_HTML_CONTENT, htmlConte
 export const MARKDOWN = (content) => ({type: ARTICLE_MARKDOWN, markdownContent: content});
 export const RESPONSSE_LIST = (content) => ({type: ARTICLE_RESPONSE_LIST, responseList: content});
 
+export const SHOW_ARTICLES = (artilces,page) => ({type: SHOWARTICLES, articles: artilces,artilces_page:page});

@@ -12,7 +12,9 @@ import HomePage from '../containers/homePage/index';
 import Admin from '../containers/admin/index';
 import UserContainer from "../containers/admin/UserContainer";
 import Layout from "../component/admin/Layout";
-import ArticleEditContainer from "../containers/admin/ArticleContainer";
+import UserDetail from "../component/admin/user/UserDetail";
+import ArticleEditContainer from "../containers/admin/ArticleEditContainer";
+import Article from "../component/admin/article/Article";
 
 let onEnter = () => {
     $('body').animate({ scrollTop: 0 });
@@ -26,9 +28,12 @@ const router = (
                 <Route path='/home' components={HomePage}/>
             </Route>
             <Route path='/admin' components={Admin}/>
+            <Route path='/admin/user/:userNo' components={UserDetail}/>
+            <Route path='/admin/article/edit' components={ArticleEditContainer}/>
+
             <Route path='/layout' components={Layout}/>
             <Route path='/user' components={UserContainer}/>
-            <Route path='/article' components={ArticleEditContainer}/>
+            <Route path='/article' components={Article}/>
         </Router>
     </Provider>
 )

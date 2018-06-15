@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import {Button, Divider, Icon, Modal, Table} from "antd";
+import {Button, Col, Divider, Icon, Modal, Row, Table} from "antd";
 import WrappedRegistrationForm from "./AntForm";
-import UploadAvatar from "./UploadAvatar";
+import './index.scss'
+import {Link} from "react-router";
 
 const IconText = ({type, text}) => (
     <span>
@@ -9,7 +10,7 @@ const IconText = ({type, text}) => (
         {text}
   </span>
 );
-
+const pageSizeOptions=['5', '10', '50'];
 class UserShow extends Component {
 
     componentDidMount() {
@@ -34,16 +35,17 @@ class UserShow extends Component {
         this.props.openUpdateView(v)
     }
     columns = [{
-        title: 'userName',
+        title: '姓名',
         dataIndex: 'userName',
         key: 'userName',
-        render: text => <a href="javascript:;">{text}</a>,
+        render: text => <a className="user-name" href="javascript:;">{text}</a>,
     }, {
-        title: 'userNo',
+        title: '学号',
         dataIndex: 'userNo',
         key: 'userNo',
+        render: text => <li><Link to={`/admin/user/${text}`}>{text}</Link></li>
     }, {
-        title: 'title',
+        title: '职称',
         dataIndex: 'title',
         key: 'title',
     }, {
@@ -66,34 +68,40 @@ class UserShow extends Component {
     render() {
         const {users, handleChangePage, openAddView,
             closeAddView, users_add_modal,user_update_modal,
-        closeUpdateView,user} = this.props;
-        const page = {
+            closeUpdateView,user,users_page} = this.props;
+        let page = {
+            ...users_page,
+            pageSize:5,
+            pageSizeOptions:pageSizeOptions,
+            showQuickJumper:true,
+            hideOnSinglePage:true,
             onChange: handleChangePage,
-            defaultCurrent: 1,
-            total: 50
         };
         console.log("u",user)
         return (
-            <div>
-                <UploadAvatar/>
-                <Button type="primary" onClick={openAddView}>新增人员</Button>
-                <Table columns={this.columns} dataSource={
+            <div className="admin-user">
+                <Row type="flex" justify="end">
+                    <Col span={4}> <Button className="add-user" type="primary" onClick={openAddView}>新增人员</Button></Col>
+                </Row>
+
+                <Table className="user-show-table" columns={this.columns} dataSource={
                     users} pagination={page}
                        onRow={(record) => {
                            return {
                                onMouseEnter: () => {
                                    console.log(record.userNo)
                                },  // 鼠标移入行
+                               onClick:()=>{
+                               }
                            };
                        }}
-
                 />
                 <Modal
-                title="Add Modal"
-                visible={users_add_modal}
-                onCancel={closeAddView}
+                    title="Add Modal"
+                    visible={users_add_modal}
+                    onCancel={closeAddView}
                 >
-                <WrappedRegistrationForm handleAction={this.addUsers.bind(this)}/>
+                    <WrappedRegistrationForm handleAction={this.addUsers.bind(this)}/>
                 </Modal>
                 <Modal
                     title="Update Modal"

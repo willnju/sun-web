@@ -1,7 +1,7 @@
 import MyFetch from "../../utils/MyFetch";
-import {SHOW_USERS, SHOW_USERS_ADD_MODAL, SHOW_USERS_UPDATE_MODAL, USER_INFO} from "../../reducers/home";
-import { message } from 'antd';
-
+import {SHOW_USERS, SHOW_USERS_ADD_MODAL, SHOW_USERS_UPDATE_MODAL} from "../../reducers/home";
+import {message} from 'antd';
+import PageUtils from "../../utils/PageUtils";
 
 export function initPage() {
     return(dispatch)=> {
@@ -15,20 +15,16 @@ export function initPage() {
 function init(p, dispatch) {
     MyFetch.get("admin/user/list", p).then(function (res) {
         console.log(res.data.list);
-        dispatch(SHOW_USERS(res.data.list))
+        dispatch(SHOW_USERS(res.data.list,PageUtils.getPage(res)))
     })
 }
 
 
 export function handleChangePage  (page) {
     return (dispatch) =>{
-        const p = {
-            pageNum: page,
-            pageSize: 10
-        };
-        MyFetch.get("admin/user/list", p).then(function (res) {
-            console.log(res)
-            dispatch(SHOW_USERS(res.data.list))
+        MyFetch.get("admin/user/list", page).then(function (res) {
+            console.log(res);
+            dispatch(SHOW_USERS(res.data.list,PageUtils.getPage(res)))
         })
     }
 }
@@ -36,7 +32,7 @@ export function   addUsers(param)  {
     return (dispatch)=> {
         console.log("add users param ", param);
         MyFetch.postJson("admin/user/add", param).then(function (res) {
-            if (res.code = 400) {
+            if (res.code == 400) {
                 message.error(res.msg);
             } else {
                 message.success("ok",1);
@@ -49,7 +45,7 @@ export function   updateUser(param)  {
     return (dispatch)=> {
         console.log("update users param ", param);
         MyFetch.postJson("admin/user/update",param).then(function (res) {
-            if (res.code = 400) {
+            if (res.code == 400) {
                 message.error(res.msg);
             } else {
                 message.success("ok", 1);
@@ -61,7 +57,7 @@ export function   updateUser(param)  {
 export function   deleteUser(userNo)  {
     return (dispatch)=> {
         MyFetch.post("admin/user/delete",userNo).then(function (res) {
-            if (res.code = 400) {
+            if (res.code == 400) {
                 message.error(res.msg);
             } else {
                 message.success("ok", 1);
@@ -81,10 +77,10 @@ export function  openUpdateView(data)  {
         return (dispatch)=> {
             let param={
                 userNo:data
-            }
+            };
             console.log("open user info  ", param);
             MyFetch.get("admin/user/info", param).then(function (res) {
-                    console.log(res.data)
+                    console.log(res.data);
                 dispatch(SHOW_USERS_UPDATE_MODAL(true,res.data))
 
             });

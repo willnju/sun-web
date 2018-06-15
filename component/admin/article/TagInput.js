@@ -1,5 +1,6 @@
 import React from 'react'
 import {Tag, Input, Tooltip, Icon, Modal} from 'antd';
+import './index.scss'
 
 class TagInput extends React.Component {
     state = {
@@ -55,7 +56,7 @@ class TagInput extends React.Component {
                 {tags.map((tag, index) => {
                     const isLongTag = tag.length > 20;
                     const tagElem = (
-                        <Tag key={tag} closable={index !== 0} afterClose={() => this.handleClose(tag)} color="red">
+                        <Tag style={{width:120,height:80,}} key={tag} closable={index !== 0} afterClose={() => this.handleClose(tag)} color="green">
                             {isLongTag ? `${tag.slice(0, 20)}...` : tag}
                         </Tag>
                     );
@@ -79,7 +80,7 @@ class TagInput extends React.Component {
                 {!inputVisible && (
                     <Tag
                         onClick={this.showInput}
-                        style={{ background: '#fff', borderStyle: 'dashed' }}
+                        style={{width:120,height:80,background: '#fff', borderStyle: 'dashed'}}
                     >
                         <Icon type="plus" />
                     </Tag>
