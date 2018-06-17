@@ -1,6 +1,6 @@
 import React from 'react'
 import {Tabs} from 'antd';
-import ArticleShowContainer from "../../../containers/admin/ArticleShowContainer";
+import ArticleShowContainer from "../../../containers/admin/article/ArticleShowContainer";
 
 const TabPane = Tabs.TabPane;
 class ArticlePane extends React.Component {

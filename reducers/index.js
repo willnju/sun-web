@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {admin, articleEdit, articles,  homeBanner} from './home';
+import {admin, articleEdit, articles, homeBanner, personal} from './home';
 import { reducer as formReducer } from 'redux-form';
 
 const todoApp = combineReducers({
@@ -7,7 +7,7 @@ const todoApp = combineReducers({
     admin:admin,
     form:formReducer,
     articleEdit:articleEdit,
-    article:articles,
+    personal:personal,
 });
 
 export default todoApp;

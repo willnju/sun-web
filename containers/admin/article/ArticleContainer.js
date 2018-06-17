@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import Article from "../../component/admin/article/Article";
+import Article from "../../../component/admin/article/Article";
 
 const ArticleContainer=connect()(Article);
 

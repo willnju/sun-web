@@ -34,6 +34,12 @@ export function admin(state = {}, action) {
                 ...state,
                 user: action.user
             };
+        case SHOWARTICLES:
+            return {
+                ...state,
+                articles: action.articles,
+                articles_page:action.articles_page,
+            };
         default:
             return state;
     }
@@ -70,7 +76,7 @@ export function articleEdit(state = {}, action) {
             return state;
     }
 }
-export function articles(state = {}, action) {
+export function personal(state = {}, action) {
     switch (action.type) {
         case SHOWARTICLES:
             return {
@@ -110,7 +116,7 @@ export const HTML_CONTENT = (content) => ({type: ARTICLE_HTML_CONTENT, htmlConte
 export const CHANGE_ARTICLE_TAGS = (content) => ({type: ARTICLE_TAGS, tags: content});
 export const RESPONSSE_LIST = (content) => ({type: ARTICLE_RESPONSE_LIST, responseList: content});
 
-export const SHOW_ARTICLES = (artilces,page) => ({type: SHOWARTICLES, articles: artilces,artilces_page:page});
+export const SHOW_ARTICLES = (artilces,page) => ({type: SHOWARTICLES, articles: artilces,articles_page:page});
 
 export const CHANGE_CHANNELS = (chs) => ({type: CHANNELS, channels: chs});
 export const CHANGE_COLUMNS = (cos) => ({type: COLUMNS, columns: cos});

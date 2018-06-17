@@ -13,9 +13,11 @@ import Admin from '../containers/admin/index';
 import UserContainer from "../containers/admin/UserContainer";
 import Layout from "../component/admin/Layout";
 import UserDetail from "../component/admin/user/UserDetail";
-import ArticleEditContainer from "../containers/admin/ArticleEditContainer";
+import ArticleEditContainer from "../containers/admin/article/ArticleEditContainer";
 import Article from "../component/admin/article/Article";
 import WrappedBasicSetting from "../component/admin/personal/BasicSetting";
+import ArticleListContainer from "../containers/admin/personal/ArticleListContainer";
+import ArticleDetailContainer from "../containers/admin/article/ArticleDetailContainer";
 
 let onEnter = () => {
     $('body').animate({ scrollTop: 0 });
@@ -34,10 +36,10 @@ const router = (
                 <Route path='/admin/layout' components={Layout}/>
                 <Route path='/admin/user' components={UserContainer}/>
                 <Route path='/admin/article' components={Article}/>
+                <Route path='/personal/settings/basic' components={WrappedBasicSetting}/>
+                <Route path='/personal/liked_article' components={ArticleListContainer}/>
+                <Route path='/article/:articleLinkId' components={ArticleDetailContainer}/>
             </Route>
-
-            <Route path='/personal/settings/basic' components={WrappedBasicSetting}></Route>
-
         </Router>
     </Provider>
 )
