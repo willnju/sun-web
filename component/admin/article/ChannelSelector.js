@@ -46,7 +46,7 @@ class ChannelSelector extends React.Component {
         const columnOptions = cos.map(column => <Option key={column.columnUri}>{column.columnNameCn}</Option>);
         return (
             <div>
-                <Select defaultValue={channelOptions[0]} style={{ width: 90 }} onChange={this.handleChangeChannel}>
+                <Select defaultValue="" style={{ width: 90 }} onChange={this.handleChangeChannel}>
                     {channelOptions}
                 </Select>
                 <Select value={this.state.column} style={{ width: 90 }} onChange={this.handleChangeColumn.bind(this)}>
