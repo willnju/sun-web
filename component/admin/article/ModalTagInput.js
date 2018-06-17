@@ -2,9 +2,9 @@ import React from 'react'
 import {Tag, Input, Tooltip, Icon, Modal} from 'antd';
 import './index.scss'
 
-class TagInput extends React.Component {
+class ModalTagInput extends React.Component {
     state = {
-        tags: ['Unremovable', 'Tag 2', 'Tag 3'],
+        tags: [],
         inputVisible: false,
         inputValue: '',
     };
@@ -22,6 +22,7 @@ class TagInput extends React.Component {
         const tags = this.state.tags.filter(tag => tag !== removedTag);
         console.log(tags);
         this.setState({ tags });
+        this.props.handleChangeTag(tags);
     }
 
     showInput = () => {
@@ -45,6 +46,7 @@ class TagInput extends React.Component {
             inputVisible: false,
             inputValue: '',
         });
+        this.props.handleChangeTag(tags);
     }
 
     saveInputRef = input => this.input = input
@@ -56,7 +58,9 @@ class TagInput extends React.Component {
                 {tags.map((tag, index) => {
                     const isLongTag = tag.length > 20;
                     const tagElem = (
-                        <Tag style={{width:120,height:80,}} key={tag} closable={index !== 0} afterClose={() => this.handleClose(tag)} color="green">
+                        <Tag
+                            // style={{width:120,height:80,}}
+                            key={tag} closable={index !== 0} afterClose={() => this.handleClose(tag)} color="green">
                             {isLongTag ? `${tag.slice(0, 20)}...` : tag}
                         </Tag>
                     );
@@ -80,7 +84,9 @@ class TagInput extends React.Component {
                 {!inputVisible && (
                     <Tag
                         onClick={this.showInput}
-                        style={{width:120,height:80,background: '#fff', borderStyle: 'dashed'}}
+                        style={{
+                            // width:120,height:80,
+                            background: '#fff', borderStyle: 'dashed'}}
                     >
                         <Icon type="plus" />
                     </Tag>
@@ -91,4 +97,4 @@ class TagInput extends React.Component {
 }
 
 
-export default TagInput;
+export default ModalTagInput;

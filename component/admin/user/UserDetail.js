@@ -4,7 +4,7 @@ import WrappedRegistrationForm from "./AntForm";
 import UploadAvatar from "./UploadAvatar";
 import './index.scss'
 import {Link} from "react-router";
-import TagInput from "../article/TagInput";
+import ModalTagInput from "../article/ModalTagInput";
 
 const Panel = Collapse.Panel;
 
@@ -26,13 +26,13 @@ class UserDetail extends Component {
 
                 <Collapse bordered={false} defaultActiveKey={['1','2','3']}>
                     <Panel header="教育经历" key="1" style={customPanelStyle} showArrow={false}>
-                        <TagInput/>
+                        <ModalTagInput/>
                     </Panel>
                     <Panel header="科研项目" key="2" style={customPanelStyle} showArrow={false}>
-                        <TagInput/>
+                        <ModalTagInput/>
                     </Panel>
                     <Panel header="发表论文" key="3" style={customPanelStyle} showArrow={false}>
-                        <TagInput/>
+                        <ModalTagInput/>
                     </Panel>
                 </Collapse>
             </div>

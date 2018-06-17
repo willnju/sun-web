@@ -1,27 +1,79 @@
 import React from 'react'
 import LzEditor from "react-lz-editor";
-import {Button, Input} from "antd";
+import {Button, Input, message} from "antd";
 import Attach from "./Attach";
-import TagInput from "./TagInput";
+import ModalTagInput from "./ModalTagInput";
+import MyFetch from "../../../utils/MyFetch";
+import ChannelSelector from "./ChannelSelector";
 
 class ArticleEdit extends React.Component{
     constructor(){
         super();
         this.state={
-            input:'',
+            articleContent:'',
+            articleTitle:"",
+            tags:[],
+            attachments:[],
+            column:"",
+            channel:"",
         }
+    }
+    onBlurTitle(e) {
+        let content=e.target.value;
+        console.log("recieved title content", content);
+        this.setState({
+            articleTitle:content,
+        })
     }
     receiveHtml(content) {
         console.log("recieved HTML content", content);
         this.setState({
-            input:content,
+            articleContent:content,
         })
-        // this.props.receiveHtml(content);
+        this.props.receiveHtml(content);
     }
     onClick=()=> {
-        const {input} = this.state;
-        console.log("recieved HTML content",input);
-        this.props.receiveHtml(input);
+        const {articleContent,tags,attachments,articleTitle,column,channel} = this.state;
+        let param={
+            articleContent,
+            tags,
+            attachments,
+            articleTitle,
+            column,
+            channel,
+            articleIsPublished:true,
+            private:false,
+        }
+        console.log("recieved column",column);
+        console.log("recieved HTML content",articleContent);
+        console.log("recieved Tag ",tags);
+        console.log("recieved attachments",attachments);
+        MyFetch.postJson("admin/article/add",param).then(function (res) {
+            if(res.code==200){
+                message.success("发布成功")
+            }else {
+                message.error(res.msg);
+            }
+        });
+    }
+    handleChangeTag=(tags)=> {
+        console.log("recieved tags",tags);
+        this.setState({
+            tags
+        })
+    }
+    handleChangeChannelAndColumn=(cc)=> {
+        this.setState({
+            cc
+        })
+        console.log("recieved cc",cc);
+        console.log("channel",this.state.channel)
+    }
+    handleChangeAttach=(attachs)=> {
+        console.log("recieved attachs",attachs);
+        this.setState({
+            attachments:attachs
+        })
     }
     onChange(info) {
         let currFileList = info.fileList;
@@ -42,8 +94,7 @@ class ArticleEdit extends React.Component{
         });
     }
     render() {
-        let policy = "";
-        const {responseList,htmlContent}=this.props;
+        const {responseList,htmlContent,channels,columns,initChannels,initColumns}=this.props;
         const uploadProps = {
             action: "http://localhost:8080/file/upload/picture",
             onChange: this.onChange.bind(this),
@@ -58,12 +109,17 @@ class ArticleEdit extends React.Component{
         };
         return (
             <div>
-                题名：
-                <Input value="题名" id="input"/>
+                <div className="title-box">
+                    <Input   placeholder="输入文章标题" maxLength="100" onBlur={this.onBlurTitle.bind(this)}/>
+                </div>
+
                 <LzEditor active={true} importContent={htmlContent} cbReceiver={this.receiveHtml.bind(this)} uploadProps={uploadProps}
                           lang="en"/>
-                <Attach/>
-                <TagInput/>
+                文章标签:<ModalTagInput handleChangeTag={this.handleChangeTag}/>
+                所属栏目:<ChannelSelector channels={channels} columns={columns }
+                                      initChannels={initChannels} initColumns={initColumns}
+                                      handleChangeChannleAndColumn={this.handleChangeChannelAndColumn}/>
+                上传附件：<Attach handleChangeAttach={this.handleChangeAttach}/>
                 <br/>
                 <Button onClick={this.onClick}>提交</Button>
             </div>

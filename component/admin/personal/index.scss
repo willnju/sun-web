@@ -1,0 +1,17 @@
+.setting-head{
+  width: 150px;
+}
+.settings-basic {
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+  .top-line{
+    padding-top: 0;
+  }
+  .avatar{
+    display: block;
+    cursor: pointer;
+  }
+}

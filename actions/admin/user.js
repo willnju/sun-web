@@ -22,7 +22,11 @@ function init(p, dispatch) {
 
 export function handleChangePage  (page) {
     return (dispatch) =>{
-        MyFetch.get("admin/user/list", page).then(function (res) {
+        let p={
+            pageNum:page,
+        }
+        console.log("page",p)
+        MyFetch.get("admin/user/list", p).then(function (res) {
             console.log(res);
             dispatch(SHOW_USERS(res.data.list,PageUtils.getPage(res)))
         })

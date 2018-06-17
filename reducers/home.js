@@ -46,21 +46,30 @@ export function articleEdit(state = {}, action) {
                 ...state,
                 htmlContent: action.htmlContent
             };
-        case ARTICLE_MARKDOWN:
+        case ARTICLE_TAGS:
             return {
                 ...state,
-                markdownContent: action.markdownContent
+                tags:action.tags? action.tags:[]
             };
         case ARTICLE_RESPONSE_LIST:
             return {
                 ...state,
                 responseList: action.responseList
             };
+        case CHANNELS:
+            return {
+                ...state,
+                channels: action.channels
+            };
+            case COLUMNS:
+        return {
+            ...state,
+            columns: action.columns
+        };
         default:
             return state;
     }
 }
-
 export function articles(state = {}, action) {
     switch (action.type) {
         case SHOWARTICLES:
@@ -79,8 +88,11 @@ const UPDATE_USER_MODAL = 'update_user_modal'
 const USER = 'user'
 
 const ARTICLE_HTML_CONTENT = "article_html_content"
-const ARTICLE_MARKDOWN = "article_markdown";
+const ARTICLE_TAGS = "article_tags";
 const ARTICLE_RESPONSE_LIST = "article_response_list";
+
+const CHANNELS = "channel";
+const COLUMNS = "columns";
 
 const SHOWARTICLES = 'show_articles'
 
@@ -95,7 +107,10 @@ export const SHOW_USERS_UPDATE_MODAL = (status, user,page) => ({
 export const USER_INFO = (user) => ({type: USER, user: user});
 
 export const HTML_CONTENT = (content) => ({type: ARTICLE_HTML_CONTENT, htmlContent: content});
-export const MARKDOWN = (content) => ({type: ARTICLE_MARKDOWN, markdownContent: content});
+export const CHANGE_ARTICLE_TAGS = (content) => ({type: ARTICLE_TAGS, tags: content});
 export const RESPONSSE_LIST = (content) => ({type: ARTICLE_RESPONSE_LIST, responseList: content});
 
 export const SHOW_ARTICLES = (artilces,page) => ({type: SHOWARTICLES, articles: artilces,artilces_page:page});
+
+export const CHANGE_CHANNELS = (chs) => ({type: CHANNELS, channels: chs});
+export const CHANGE_COLUMNS = (cos) => ({type: COLUMNS, columns: cos});

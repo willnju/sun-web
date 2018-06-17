@@ -74,10 +74,9 @@ class UserShow extends Component {
             pageSize:5,
             pageSizeOptions:pageSizeOptions,
             showQuickJumper:true,
-            hideOnSinglePage:true,
+            hideOnSinglePage:false,
             onChange: handleChangePage,
         };
-        console.log("u",user)
         return (
             <div className="admin-user">
                 <Row type="flex" justify="end">

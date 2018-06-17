@@ -15,6 +15,7 @@ import Layout from "../component/admin/Layout";
 import UserDetail from "../component/admin/user/UserDetail";
 import ArticleEditContainer from "../containers/admin/ArticleEditContainer";
 import Article from "../component/admin/article/Article";
+import WrappedBasicSetting from "../component/admin/personal/BasicSetting";
 
 let onEnter = () => {
     $('body').animate({ scrollTop: 0 });
@@ -30,11 +31,13 @@ const router = (
             <Route path='/admin' components={Admin}>
                 <Route path='/admin/user/:userNo' components={UserDetail}/>
                 <Route path='/admin/article/edit' components={ArticleEditContainer}/>
-
                 <Route path='/admin/layout' components={Layout}/>
                 <Route path='/admin/user' components={UserContainer}/>
                 <Route path='/admin/article' components={Article}/>
             </Route>
+
+            <Route path='/personal/settings/basic' components={WrappedBasicSetting}></Route>
+
         </Router>
     </Provider>
 )
