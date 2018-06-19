@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import Article from "../../../component/admin/article/Article";
+import ArticleAdmin from "../../../component/admin/article/ArticleAdmin";
 
-const ArticleContainer=connect()(Article);
+const ArticleContainer=connect()(ArticleAdmin);
 
 export default ArticleContainer;

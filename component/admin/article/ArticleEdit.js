@@ -30,7 +30,6 @@ class ArticleEdit extends React.Component{
         this.setState({
             articleContent:content,
         })
-        this.props.receiveHtml(content);
     }
     onClick=()=> {
         const {articleContent,tags,attachments,articleTitle,column,channel} = this.state;
@@ -57,7 +56,6 @@ class ArticleEdit extends React.Component{
         });
     }
     handleChangeTag=(tags)=> {
-        console.log("recieved tags",tags);
         this.setState({
             tags
         })
@@ -66,8 +64,6 @@ class ArticleEdit extends React.Component{
         this.setState({
             cc
         })
-        console.log("recieved cc",cc);
-        console.log("channel",this.state.channel)
     }
     handleChangeAttach=(attachs)=> {
         console.log("recieved attachs",attachs);
@@ -76,25 +72,50 @@ class ArticleEdit extends React.Component{
         })
     }
     onChange(info) {
+        console.log("info",info)
         let currFileList = info.fileList;
         currFileList = currFileList.filter((f) => (!f.length));
         let url = "http://localhost:8080";
-        //读取远程路径并显示链接
-        console.log("info",info)
+
         //Read remote address and display.
+        //读取远程路径并显示链接
         currFileList = currFileList.map((file) => {
             if (file.response) {
                 // concat url
                 // 组件会将 file.url 作为链接进行展示
-                file.url = url + file.response.url;
+                console.log("file",file)
+                file.url = url + file.response.data;
             }
             if (!file.length) {
-                return file;
             }
+            return file;
         });
+        let _this = this;
+
+        // filtering successed files
+        //按照服务器返回信息筛选成功上传的文件
+        currFileList = currFileList.filter((file) => {
+            //multiple uploading?
+            //根据多选选项更新添加内容
+            // let hasNoExistCurrFileInUploadedList = !~findIndex(_this.state.responseList, item => item.name === file.name)
+            // if (hasNoExistCurrFileInUploadedList) {
+                if (!!_this.props.isMultiple == true) {
+                    _this.state.responseList.push(file);
+                } else {
+                    _this.state.responseList = [file];
+                }
+            // }
+            return !!file.response || (!!file.url && file.status == "done") || file.status == "uploading";
+        });
+        // currFileList = uniqBy(currFileList, "name");
+        if (!!currFileList && currFileList.length != 0) {
+            this.setState({responseList: currFileList});
+        }
+        _this.forceUpdate();
     }
     render() {
-        const {responseList,htmlContent,channels,columns,initChannels,initColumns}=this.props;
+        const {responseList,articleContent}=this.state;
+        const {channels,columns,initChannels,initColumns}=this.props;
         const uploadProps = {
             action: "http://localhost:8080/file/upload/picture",
             onChange: this.onChange.bind(this),
@@ -113,7 +134,7 @@ class ArticleEdit extends React.Component{
                     <Input   placeholder="输入文章标题" maxLength="100" onBlur={this.onBlurTitle.bind(this)}/>
                 </div>
 
-                <LzEditor active={true} importContent={htmlContent} cbReceiver={this.receiveHtml.bind(this)} uploadProps={uploadProps}
+                <LzEditor active={true} importContent={articleContent} cbReceiver={this.receiveHtml.bind(this)} uploadProps={uploadProps}
                           lang="en"/>
                 文章标签:<ModalTagInput handleChangeTag={this.handleChangeTag}/>
                 所属栏目:<ChannelSelector channels={channels} columns={columns }

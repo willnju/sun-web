@@ -22,7 +22,7 @@ class UserDetail extends Component {
         };
         return (
             <div >
-                <p>{this.props.params.userNo}</p>
+                {/*<p>{this.props.params.userNo}</p>*/}
 
                 <Collapse bordered={false} defaultActiveKey={['1','2','3']}>
                     <Panel header="教育经历" key="1" style={customPanelStyle} showArrow={false}>

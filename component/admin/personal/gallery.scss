@@ -1,0 +1,286 @@
+html {
+  font-size: 1vh;
+}
+@media (orientation: portrait) {
+  html {
+    font-size: 1vw;
+  }
+}
+.Selected {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.Selected__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 125%;
+  width: 125%;
+  background-size: cover;
+  background-position: center;
+  -webkit-transform: translate3d(-50%, -50%, 0) scale(0.85);
+  transform: translate3d(-50%, -50%, 0) scale(0.85);
+  -webkit-transition: -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1), -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+.Selected:before,
+.Selected:after {
+  content: '';
+  background: white;
+  position: absolute;
+  top: -2%;
+  height: 104%;
+  width: 102%;
+}
+.Selected:before {
+  right: 101%;
+  z-index: 2;
+}
+.Selected:after {
+  left: 101%;
+}
+.Selected--entering:before,
+.Selected--entering:after {
+  -webkit-transition: -webkit-transform 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: -webkit-transform 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86), -webkit-transform 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.Selected--entering.Selected--moving-left {
+  -webkit-transition: -webkit-transform 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  transition: -webkit-transform 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  transition: transform 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  transition: transform 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335), -webkit-transform 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+}
+.Selected--entering.Selected--moving-left:after {
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+.Selected--entering.Selected--moving-left .Selected__image {
+  -webkit-transform: translate3d(-42.5%, -50%, 0) scale(0.85) skew(-5deg);
+  transform: translate3d(-42.5%, -50%, 0) scale(0.85) skew(-5deg);
+  -webkit-transition: -webkit-transform 1ms linear 300ms;
+  transition: -webkit-transform 1ms linear 300ms;
+  transition: transform 1ms linear 300ms;
+  transition: transform 1ms linear 300ms, -webkit-transform 1ms linear 300ms;
+}
+.Selected--entering.Selected--moving-right {
+  -webkit-transition: -webkit-transform 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  transition: -webkit-transform 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  transition: transform 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  transition: transform 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335), -webkit-transform 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+}
+.Selected--entering.Selected--moving-right:before {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+}
+.Selected--entering.Selected--moving-right .Selected__image {
+  -webkit-transform: translate3d(-57.5%, -50%, 0) scale(0.85) skew(5deg);
+  transform: translate3d(-57.5%, -50%, 0) scale(0.85) skew(5deg);
+  -webkit-transition: -webkit-transform 1ms linear 300ms;
+  transition: -webkit-transform 1ms linear 300ms;
+  transition: transform 1ms linear 300ms;
+  transition: transform 1ms linear 300ms, -webkit-transform 1ms linear 300ms;
+}
+.Selected--exiting:before,
+.Selected--exiting:after {
+  -webkit-transition: -webkit-transform 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: -webkit-transform 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86), -webkit-transform 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.Selected--exiting.Selected--moving-left:after {
+  -webkit-transform: translateX(-200%);
+  transform: translateX(-200%);
+}
+.Selected--exiting.Selected--moving-right:before {
+  -webkit-transform: translateX(200%);
+  transform: translateX(200%);
+}
+.Thumb {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 16%;
+  height: 80%;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-transform: translateX(-100vw);
+  transform: translateX(-100vw);
+  opacity: 0;
+  overflow: hidden;
+}
+.Thumb__inner {
+  position: absolute;
+  width: 125%;
+  height: 80%;
+  top: 50%;
+  left: 50%;
+  background-size: cover;
+  background-position: center;
+  -webkit-transform: scale(0.8) translate3d(-50%, -50%, 0);
+  transform: scale(0.8) translate3d(-50%, -50%, 0);
+  -webkit-transform-origin: left top;
+  transform-origin: left top;
+  -webkit-transition: -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1), -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.Thumb:hover .Thumb__inner {
+  -webkit-transition: -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1), -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  -webkit-transform: scale(1.2) translate3d(-50%, -50%, 0);
+  transform: scale(1.2) translate3d(-50%, -50%, 0);
+}
+.Thumb--offset-4,
+.Thumb--offset-3,
+.Thumb--offset-2,
+.Thumb--offset-1,
+.Thumb--offset0,
+.Thumb--offset1,
+.Thumb--offset2,
+.Thumb--offset3,
+.Thumb--offset4 {
+  opacity: 1;
+  -webkit-transition: opacity 300ms cubic-bezier(0.075, 0.82, 0.165, 1), -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: opacity 300ms cubic-bezier(0.075, 0.82, 0.165, 1), -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1), opacity 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1), opacity 300ms cubic-bezier(0.075, 0.82, 0.165, 1), -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.Thumb--offset-5,
+.Thumb--offset-6,
+.Thumb--offset-7 {
+  -webkit-transform: translateX(-700%);
+  transform: translateX(-700%);
+}
+.Thumb--offset-4 {
+  -webkit-transform: translateX(-550%);
+  transform: translateX(-550%);
+  -webkit-transition-delay: 150ms;
+  transition-delay: 150ms;
+}
+.Thumb--offset-3 {
+  -webkit-transform: translateX(-425%);
+  transform: translateX(-425%);
+  -webkit-transition-delay: 112.5ms;
+  transition-delay: 112.5ms;
+}
+.Thumb--offset-2 {
+  -webkit-transform: translateX(-300%);
+  transform: translateX(-300%);
+  -webkit-transition-delay: 75ms;
+  transition-delay: 75ms;
+}
+.Thumb--offset-1 {
+  -webkit-transform: translateX(-175%);
+  transform: translateX(-175%);
+  -webkit-transition-delay: 37.5ms;
+  transition-delay: 37.5ms;
+}
+.Thumb--offset0 {
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -webkit-transition-delay: 0ms;
+  transition-delay: 0ms;
+}
+.Thumb--offset0 .Thumb__inner {
+  -webkit-transform: scale(0.8) translate3d(-50%, -50%, 0) !important;
+  transform: scale(0.8) translate3d(-50%, -50%, 0) !important;
+}
+.Thumb--offset1 {
+  -webkit-transform: translateX(75%);
+  transform: translateX(75%);
+  -webkit-transition-delay: 37.5ms;
+  transition-delay: 37.5ms;
+}
+.Thumb--offset2 {
+  -webkit-transform: translateX(200%);
+  transform: translateX(200%);
+  -webkit-transition-delay: 75ms;
+  transition-delay: 75ms;
+}
+.Thumb--offset3 {
+  -webkit-transform: translateX(325%);
+  transform: translateX(325%);
+  -webkit-transition-delay: 112.5ms;
+  transition-delay: 112.5ms;
+}
+.Thumb--offset4 {
+  -webkit-transform: translateX(450%);
+  transform: translateX(450%);
+  -webkit-transition-delay: 150ms;
+  transition-delay: 150ms;
+}
+.Thumb--offset5,
+.Thumb--offset6,
+.Thumb--offset7 {
+  -webkit-transform: translateX(600%);
+  transform: translateX(600%);
+}
+.Thumbs {
+  text-align: center;
+  position: relative;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transition: -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1), -webkit-transform 2500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.Thumbs--entering {
+  -webkit-transition: -webkit-transform 1ms linear;
+  transition: -webkit-transform 1ms linear;
+  transition: transform 1ms linear;
+  transition: transform 1ms linear, -webkit-transform 1ms linear;
+}
+.Thumbs--entering.Thumbs--moving-left {
+  -webkit-transform: skewX(3deg);
+  transform: skewX(3deg);
+}
+.Thumbs--entering.Thumbs--moving-right {
+  -webkit-transform: skewX(-3deg);
+  transform: skewX(-3deg);
+}
+.Gallery {
+  height: 60rem;
+  width: 100rem;
+}
+.Gallery__selected {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75%;
+}
+.Gallery__thumbs {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+}
+.Center {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+.Center__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}

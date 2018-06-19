@@ -1,103 +1,86 @@
 import React from 'react'
-import {Avatar, List, Input, Button} from "antd";
 import MyFetch from "../../../utils/MyFetch";
 import PageUtils from "../../../utils/PageUtils";
-import moment from "moment/moment";
-import {IconText} from "../../common/IconText";
-import Emoji from "../../common/Emoji";
-const { TextArea } = Input;
+import CommentEditForm from "./CommentEdit";
+import CommentList from "./CommentList";
+import {message} from 'antd';
+import './index.scss'
+
 class Comment extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            comments:[],
-            page:{},
-            displaySubmit:false,
+        this.state = {
+            comment: "",
+            comments: [],
+            page: {},
+            displaySubmit: "none",
         }
     }
-    componentDidMount () {
+
+    componentDidMount() {
         console.log("componentDidMount start");
-        let that=this;
-        console.log("comment linkid",this.props.articleLinkId);
-        let p={
-            articleLinkId:this.props.articleLinkId,
-            pageNum:1,
-            pageSize:5,
+        let that = this;
+        console.log("comment linkid", this.props.articleLinkId);
+        let p = {
+            articleLinkId: this.props.articleLinkId,
+            pageNum: 1,
+            pageSize: 5,
         };
-        MyFetch.get("comment/list",p).then(function (res) {
+        MyFetch.get("comment/list", p).then(function (res) {
             console.log(res);
             that.setState({
-                comments:res.data.list,
-                page:PageUtils.getPage(res.data)
+                comments: res.data.list,
+                page: PageUtils.getPage(res.data)
             })
         })
         console.log("componentDidMount end")
 
     }
-    changePage(page){
+
+    changePage = (page) => {
+        let pageNum = 1;
+        if (page) {
+            pageNum = page;
+        }
         const p = {
-            articleLinkId:this.props.articleLinkId,
-            pageNum: page,
+            articleLinkId: this.props.articleLinkId,
+            pageNum: pageNum,
             pageSize: 5,
         };
-        let that=this;
-        MyFetch.get("comment/list",p).then(function (res) {
+        let that = this;
+        MyFetch.get("comment/list", p).then(function (res) {
             console.log(res);
             that.setState({
-                comments:res.data.list,
-                page:PageUtils.getPage(res.data)
+                comments: res.data.list,
+                page: PageUtils.getPage(res.data)
             })
         })
-    }
-    focusComment(){
-        console.log("focusComment")
-        this.setState({
-            displaySubmit:true,
-        })
-    }
-    onSubmitComment(){
+    };
+    onSubmitComment = (comment) => {
         console.log("onSubmitComment")
-        let content=this.refs.textArea;
-        console.log(content)
-    }
-    render() {
-        const{comments,page}=this.state;
+        console.log(comment);
+        let param = {
+            articleLinkId: this.props.articleLinkId,
+            commentContent: comment
+        }
+        let that = this;
+        MyFetch.postJson("comment/add", param).then(function (res) {
+            if (res.code == 200) {
+                message.success("评论成功~")
+                message.success(that.state.current)
+                that.changePage(1)
+            } else {
+                message.error("评论失败：" + res.msg);
+            }
+        })
+    };
 
-        console.log(comments)
-        console.log("page",page)
-        console.log("displaySubmit",this.state.displaySubmit)
+    render() {
+        const {comments, page} = this.state;
         return (
-            <div >
-                <Avatar >孟</Avatar>
-                <TextArea ref="textArea" rows={4} placeholder="评论" onFocus={this.focusComment.bind(this)}/>
-                <Emoji/>
-                <Button onClick={this.onSubmitComment.bind(this)} style={{display:this.state.displaySubmit}}>评论</Button>
-                <List
-                    itemLayout="vertical"
-                    size="large"
-                    split="true"
-                    pagination={{
-                        ...page,
-                        pageSize:5,
-                        onChange: this.changePage.bind(this),
-                    }}
-                    dataSource={comments}
-                    footer={<div><b>ant design</b> footer part</div>}
-                    renderItem={item => (
-                        <List.Item
-                            key={item.commentId}
-                            actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="33" />, <IconText type="message" text="2" />]}
-                            extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
-                        >
-                            <List.Item.Meta
-                                // avatar={<Avatar href="#" >item.articleAuthor</Avatar>}
-                                title={<span><a href="#"> <Avatar >{item.commentUserId}</Avatar></a>发布时间： {moment(item.commnetDate).format("YYYY-MM-DD HH:mm:ss")}</span>}
-                                description={item.articleTitle}
-                            />
-                           {item.commentContent}
-                        </List.Item>
-                    )}
-                />
+            <div className="comment-list">
+                <CommentEditForm onSubmitComment={this.onSubmitComment}/>
+                <CommentList comments={comments} page={page} changePage={this.changePage}/>
             </div>
         )
     }

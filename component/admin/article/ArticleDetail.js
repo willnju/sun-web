@@ -1,41 +1,58 @@
 import React from 'react'
 import MyFetch from "../../../utils/MyFetch";
 import Comment from "./Comment";
-import {BackTop} from "antd";
+import {BackTop, Button, Divider} from "antd";
+import './index.scss'
 
 class ArticleDetail extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            text:"a"
+        this.state = {
+            article: {},
+            articleLinkId: this.props.params.articleLinkId,
+            canEdit: false,
         }
     }
-    componentDidMount () {
+
+    componentDidMount() {
         console.log("componentDidMount start")
-        let that=this;
-        MyFetch.get("admin/article/list").then(function (res) {
+        let that = this;
+        let param = {
+            articleLinkId: this.state.articleLinkId,
+        }
+        MyFetch.get("article/detail", param).then(function (res) {
             console.log(res);
             that.setState({
-                text:"b"
+                article: res.data,
             })
         })
         console.log("componentDidMount end")
 
     }
+
     render() {
-        let linkId=this.props.params.articleLinkId;
-        console.log("article detail linkid",linkId)
+        const {article, articleLinkId} = this.state;
+        console.log("article detail ", article)
 
         return (
-            <div >
-                <h1>标题</h1>
-                {this.state.text}
-                <p>正文</p>
-        <Comment articleLinkId={linkId}/>
-                <BackTop />
+            <div className="note">
+                <div className="container">
+                    <div className="article">
+                        <h1>{article.articleTitle}</h1>
+                        <div><Button>编辑</Button></div>
+                        <div className="show-content">
+                            <div dangerouslySetInnerHTML={{
+                                __html: article.articleContent
+                            }}/>
+                        </div>
+                    </div>
+                    <div>{article.articleTag}</div>
+                    <Comment articleLinkId={articleLinkId}/>
+                </div>
+                <BackTop/>
             </div>
         )
     }
 }
 
-export default ArticleDetail;
+export default ArticleDetail

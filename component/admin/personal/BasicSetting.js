@@ -2,6 +2,9 @@ import React from 'react';
 import {AutoComplete, Button, Form, Icon, Input, Radio,  Select, Tooltip} from 'antd';
 import UploadAvatar from "../user/UploadAvatar";
 import './index.scss'
+import './gallery.scss'
+
+import Gallery from "../../common/Gallery";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -80,6 +83,7 @@ class BasicSetting extends React.Component {
         };
         return (
             <div className="settings-basic">
+                <Gallery/>
                 <Form onSubmit={this.handleSubmit.bind(this)}>
                     <div className="avatar">
                     <UploadAvatar style={{display: "block",cursor:"pointer"}}/>
