@@ -28,7 +28,7 @@ class Attach extends React.Component {
     }
     render() {
         const props = {
-            action: pref+'/file/upload/picture',
+            action: pref+'/file/upload/attach',
             onRemove(file){
             console.log("remove",file);
             },

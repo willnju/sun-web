@@ -27,7 +27,6 @@ class ArticleList extends React.Component {
                     split="true"
                     pagination={{
                         ...articles_page,
-                        pageSize:5,
                         onChange: this.changePage.bind(this),
                     }}
                     dataSource={articles}

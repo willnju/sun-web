@@ -3,6 +3,7 @@ import MyFetch from "../../../utils/MyFetch";
 import Comment from "./Comment";
 import {BackTop, Button, Divider} from "antd";
 import './index.scss'
+import {Link} from "react-router";
 
 class ArticleDetail extends React.Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class ArticleDetail extends React.Component {
                 <div className="container">
                     <div className="article">
                         <h1>{article.articleTitle}</h1>
-                        <div><Button>编辑</Button></div>
+                        <div><Button ><Link to={`/admin/article/edit/${article.articleLinkId}`}>编辑</Link></Button></div>
                         <div className="show-content">
                             <div dangerouslySetInnerHTML={{
                                 __html: article.articleContent

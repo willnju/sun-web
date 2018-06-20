@@ -33,7 +33,7 @@ const router = (
                 <Route path='/home' components={HomePage}/>
             </Route>
             <Route path='/admin' components={Admin}>
-                <Route path='/admin/article/edit' components={ArticleEditContainer}/>
+                <Route path='/admin/article/edit/:articleLinkId' components={ArticleEditContainer}/>
                 <Route path='/admin/layout' components={Layout}/>
                 <Route path='/admin/management' components={Management}>
                     <Route path='/admin/user' components={UserContainer}/>
