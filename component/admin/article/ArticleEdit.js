@@ -35,13 +35,23 @@ class ArticleEdit extends React.Component{
             }
             MyFetch.get("article/detail", param).then(function (res) {
                 let article=res.data;
+                console.log("article.tag",article.tags)
+                let atts=article.attachments;
+                atts=atts.map((a,index)=>{
+                    let file={
+                        name:a.attachName,
+                        url:a.attachUri,
+                        uid:index,
+                    }
+                    return file;
+                })
                 that.setState({
                     articleLinkId:article.articleLinkId,
                     articleContent:article.articleContent,
                     htmlContent:article.articleContent,
                     articleTitle:article.articleTitle,
-                    tags:article.tag,
-                    attachments:[],
+                    tags:article.tags,
+                    attachments:atts,
                     column:"",
                     channel:"",
                 })
@@ -105,7 +115,7 @@ class ArticleEdit extends React.Component{
             articleTitle:content,
         })
     }
-    onClick=()=> {
+    onSubmit=()=> {
         const {articleLinkId,articleContent,tags,attachments,articleTitle,column,channel} = this.state;
         let param={
             articleLinkId,
@@ -116,6 +126,27 @@ class ArticleEdit extends React.Component{
             column,
             channel,
             articleIsPublished:true,
+            private:false,
+        }
+        MyFetch.postJson("admin/article/addOrUpdate",param).then(function (res) {
+            if(res.code==200){
+                message.success("发布成功")
+            }else {
+                message.error(res.msg);
+            }
+        });
+    }
+    onSave=()=> {
+        const {articleLinkId,articleContent,tags,attachments,articleTitle,column,channel} = this.state;
+        let param={
+            articleLinkId,
+            articleContent,
+            tags,
+            attachments,
+            articleTitle,
+            column,
+            channel,
+            articleIsPublished:false,
             private:false,
         }
         MyFetch.postJson("admin/article/addOrUpdate",param).then(function (res) {
@@ -137,12 +168,13 @@ class ArticleEdit extends React.Component{
         })
     }
     handleChangeAttach=(attachs)=> {
+        console.log("attaches",attachs)
         this.setState({
             attachments:attachs
         })
     }
     render() {
-        const {htmlContent,articleTitle}=this.state;
+        const {htmlContent,articleTitle,tags,attachments}=this.state;
         const {channels,columns,initChannels,initColumns}=this.props;
         const uploadProps = {
             action: "http://localhost:8080/file/upload/picture",
@@ -150,7 +182,6 @@ class ArticleEdit extends React.Component{
             listType: 'picture',
             fileList: this.state.responseList,
             data: (file) => {
-                // customize uploading parameters, code example use UPYUN(https://www.upyun.com/)
                 //自定义上传参数，这里使用UPYUN
                 return {
                     name:file.name,
@@ -161,21 +192,24 @@ class ArticleEdit extends React.Component{
             showUploadList: true
         }
         console.log("articleTitle",articleTitle)
+        console.log("attaches",attachments)
         return (
-            <div >
+            <div className="edit-container">
                 <div className="title-box">
                     <Input  defaultValue={articleTitle}  placeholder="输入文章标题"  maxLength="100" onBlur={this.onBlurTitle.bind(this)}/>
                 </div>
 
                 <LzEditor styles={{overflow:"scroll"}} active={true} importContent={htmlContent} cbReceiver={this.receiveHtml} uploadProps={uploadProps}
                           lang="en"/>
-                文章标签:<ModalTagInput handleChangeTag={this.handleChangeTag}/>
+                文章标签:<ModalTagInput tags={tags} handleChangeTag={this.handleChangeTag}/>
                 所属栏目:<ChannelSelector channels={channels} columns={columns }
                                       initChannels={initChannels} initColumns={initColumns}
                                       handleChangeChannleAndColumn={this.handleChangeChannelAndColumn}/>
-                上传附件：<Attach handleChangeAttach={this.handleChangeAttach}/>
+                上传附件：<Attach attachments={attachments} handleChangeAttach={this.handleChangeAttach}/>
                 <br/>
-                <Button onClick={this.onClick}>提交</Button>
+                <Button onClick={this.onSubmit}>发布文章</Button>
+                <Button onClick={this.onSave}>保存文章</Button>
+
             </div>
         );
     }

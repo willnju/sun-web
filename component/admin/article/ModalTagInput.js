@@ -4,24 +4,23 @@ import './index.scss'
 
 class ModalTagInput extends React.Component {
     state = {
-        tags: [],
         inputVisible: false,
         inputValue: '',
     };
-
-    handleOk = (tags) => {
-        console.log(tags);
+    componentDidMount() {
+        console.log("this.props.tags",this.props.tags)
+        // this.setState({
+        //     tags: this.props.tags?this.props.tags:[],
+        // })
     }
-    handleCancel = (tags) => {
-        console.log(tags);
+    handleCancel = () => {
         this.setState({
             inputVisible: false,
         });
     }
     handleClose = (removedTag) => {
-        const tags = this.state.tags.filter(tag => tag !== removedTag);
+        const tags = this.props.tags.filter(tag => tag !== removedTag);
         console.log(tags);
-        this.setState({ tags });
         this.props.handleChangeTag(tags);
     }
 
@@ -36,13 +35,12 @@ class ModalTagInput extends React.Component {
     handleInputConfirm = () => {
         const state = this.state;
         const inputValue = state.inputValue;
-        let tags = state.tags;
+        let tags = this.props.tags;
         if (inputValue && tags.indexOf(inputValue) === -1) {
             tags = [...tags, inputValue];
         }
         console.log(tags);
         this.setState({
-            tags,
             inputVisible: false,
             inputValue: '',
         });
@@ -52,7 +50,8 @@ class ModalTagInput extends React.Component {
     saveInputRef = input => this.input = input
 
     render() {
-        const { tags, inputVisible, inputValue } = this.state;
+        const {inputVisible, inputValue } = this.state;
+        const {tags}=this.props;
         return (
             <div>
                 {tags.map((tag, index) => {
@@ -67,7 +66,7 @@ class ModalTagInput extends React.Component {
                     return isLongTag ? <Tooltip title={tag} key={tag}>{tagElem}</Tooltip> : tagElem;
                 })}
                 <Modal
-                    title="Basic Modal"
+                    title="新增标签"
                     visible={inputVisible}
                     onOk={this.handleInputConfirm.bind(this)}
                     onCancel={this.handleCancel.bind(this)}
@@ -76,7 +75,7 @@ class ModalTagInput extends React.Component {
                         ref={this.saveInputRef}
                         type="text"
                         size="small"
-                        style={{ width: 78 }}
+                        style={{ width: 80 }}
                         value={inputValue}
                         onChange={this.handleInputChange}
                     />

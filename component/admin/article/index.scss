@@ -1,6 +1,12 @@
-.title-box {
-  margin-top: 36px;
-  margin-bottom: 24px;
+.edit-container {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  .title-box {
+    margin-top: 36px;
+    margin-bottom: 24px;
+    height: 50px;
+  }
 }
 
 .tag-input {
@@ -21,7 +27,7 @@
     padding-bottom: 40px;
     width: 620px;
   }
-  .container{
+  .container {
     width: 80%;
     margin-right: auto;
     margin-left: auto;
@@ -38,14 +44,14 @@
     }
     .show-content {
       color: #2f2f2f;
-      word-break: break-word!important;
+      word-break: break-word !important;
       word-break: break-all;
       font-size: 16px;
       font-weight: 400;
       line-height: 1.7;
     }
   }
-  .comment-list{
+  .comment-list {
     padding-top: 20px;
     .new-comment {
       position: relative;
@@ -72,7 +78,7 @@
   }
 }
 
-.author{
+.author {
   margin-bottom: 16px;
   .avatar {
     width: 48px;
@@ -96,3 +102,4 @@
     }
   }
 }
+
